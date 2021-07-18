@@ -8,6 +8,7 @@ import AuthenticatedRoute from './AuthenticatedRoute';
 import ErrorMessage from './ErrorMessage';
 import ProductList from './ProductList/ProductList';
 import Product from './ProductList/Product';
+import ProductUpdate from './ProductList/ProductUpdate';
 
 
 class ShopMain extends Component {
@@ -22,6 +23,7 @@ class ShopMain extends Component {
               <Route path="/login" exact component={Login} />
               <AuthenticatedRoute path="/ProductList" exact component={ProductList} />
               <AuthenticatedRoute path="/product/:id" exact component={Product} />
+              <AuthenticatedRoute path="/productUpdate/:id" exact component={ProductUpdate} />
               <AuthenticatedRoute path="/logout" exact component={LogoutComponent} />
               <Route component={ErrorMessage} />
             </Switch>
