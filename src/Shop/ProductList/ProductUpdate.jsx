@@ -23,9 +23,10 @@ class ProductUpdate extends Component {
 
         if (this.state.id === -1) {
             return
+        } else {
+            ProductDataService.RerieveProduct(this.state.id)
+                .then(response => this.setState({ name: response.data.name, price: response.data.price, description: response.data.description, url: response.data.url }))
         }
-        ProductDataService.RerieveProduct(this.state.id)
-            .then(response => this.setState({ name: response.data.name, price: response.data.price, description: response.data.description, url: response.data.url }))
     }
 
     validate(values) {
@@ -42,8 +43,15 @@ class ProductUpdate extends Component {
 
         let product = { id: this.state.id, name: values.name, price: values.price, description: values.description, url: values.url }
 
-        ProductDataService.updateProduct(this.state.id, product)
-            .then(() => this.props.history.push(`/product/${this.state.id}`))
+        if (this.state.id != -1) {
+            ProductDataService.updateProduct(this.state.id, product)
+                .then(() => this.props.history.push(`/product/${this.state.id}`))
+        }
+        else {
+
+            ProductDataService.addTodo(product)
+                .then(() => this.props.history.push('/ProductList'))
+        }
     }
 
     render() {

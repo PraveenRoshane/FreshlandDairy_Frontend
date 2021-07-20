@@ -2,7 +2,6 @@ import { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card, Button } from 'react-bootstrap';
 import { withRouter } from 'react-router';
-import { Link } from 'react-router-dom';
 import ProductDataService from '../../API/ProductDataService';
 
 class Product extends Component {

@@ -1,8 +1,10 @@
 import { Component } from 'react';
 import ProductCard from './ProductCard';
-import Authentication from '../Authentication';
 import { withRouter } from 'react-router';
+import { Link } from 'react-router-dom';
 import ProductDataService from '../../API/ProductDataService';
+import { Fab } from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
 
 class ProductList extends Component {
 
@@ -12,10 +14,8 @@ class ProductList extends Component {
         this.state = {
             Products: [], message: null
         }
-
-        // this.updateTodoClick = this.updateTodoClick.bind(this)
+       
         this.refreshProduct = this.refreshProduct.bind(this)
-        // this.addClick = this.addClick.bind(this)
     }
 
     componentDidMount() {
@@ -27,13 +27,6 @@ class ProductList extends Component {
             .then(response => { this.setState({ Products: response.data }) })
     }
 
-    //   addClick(){
-
-    //     this.props.history.push(`/todos/-1`)
-
-    //   }
-
-
     render() {
         return (
             <div className="container" onLoad={this.refreshProduct}>
@@ -42,6 +35,12 @@ class ProductList extends Component {
                         (Product => <ProductCard product={Product} />)
                     }
                 </div>
+                <Link to={`productUpdate/-1`} style={{ textDecoration: 'none' }}>
+                <Fab color="primary" aria-label="add" variant="extended">
+                    <AddIcon />Add New Product
+                </Fab>
+                </Link>
+                <br/><br/>
             </div>
         );
     }
