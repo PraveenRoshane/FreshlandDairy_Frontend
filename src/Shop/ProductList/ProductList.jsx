@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import ProductDataService from '../../API/ProductDataService';
 import { Fab } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
+import Grid from '@material-ui/core/Grid';
 
 class ProductList extends Component {
 
@@ -30,11 +31,11 @@ class ProductList extends Component {
     render() {
         return (
             <div className="container" onLoad={this.refreshProduct}>
-                <div className="grid">
+                <Grid container spacing={3}>
                     {this.state.Products.map
                         (Product => <ProductCard product={Product} />)
                     }
-                </div>
+                </Grid>
                 <Link to={`productUpdate/-1`} style={{ textDecoration: 'none' }}>
                 <Fab color="primary" aria-label="add" variant="extended">
                     <AddIcon />Add New Product

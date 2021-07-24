@@ -5,7 +5,7 @@ import './ProductCard.css'
 import { Link } from 'react-router-dom';
 
 function ProductCard(props) {
-    return (
+    return (        
         <Card style={{ width: '18rem' }} key={props.product.id} className="box">
             <Link to={`product/${props.product.id}`}>
             <Card.Img variant="top" src={props.product.url} />
@@ -19,7 +19,7 @@ function ProductCard(props) {
                     Rs.{props.product.price}.00
                 </Card.Text>
             </Card.Body>
-        </Card>
+        </Card>        
     );
 }
 
