@@ -4,7 +4,7 @@ import ShopMain from './Shop/ShopMain';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App">     
       <ShopMain></ShopMain>
     </div>
   );

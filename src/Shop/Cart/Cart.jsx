@@ -1,38 +1,61 @@
-import { Component } from 'react';
-import { Card } from 'react-bootstrap'
+import React, {useEffect, useState} from 'react';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+import { connect } from 'react-redux';
+import CartItem from './CartItem';
 
-class Cart extends Component {
+function Cart({ cart }) {
 
-  constructor(props){
-    super(props)
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalItems, setTotalItems] = useState(0);
 
-    this.state = {
-        cart: [this.props.match.params.uniqCart]
-    }
+  useEffect(()=>{
+    let item1 = 0;
+    let price1 = 0;
 
-    this.show = this.show.bind(this)
+    cart.forEach( item => {
+      item1 += item.qty;
+      price1 += item.qty * item.price
+      console.log(item.price)
+    })
 
-  }
+    setTotalPrice(price1)
+    setTotalItems(item1)
+    console.log(price1)
 
-  show(){
-    console.log(this.props.match.params.uniqCart)
-  }
+  },[cart,totalPrice,totalItems,setTotalPrice,setTotalItems])
 
-
-  render() {
-    return (
-      <div className="Cart">
-
-        <button onClick={this.show}></button>
-        <Card style={{ width: '18rem' }}>
-          <Card.Body>
-            <Card.Img variant="top"/>
-            <Card.Text></Card.Text>
-          </Card.Body>          
-        </Card>
+  return (
+    <div className="Cart">
+      <div className="CartItem">
+        {cart.map((product) => (<CartItem item={product} key={cart.id} />))}
       </div>
-    );
+      <Card>
+        <CardContent>
+          <Typography color="textSecondary" gutterBottom variant="h5" component="h2">
+            Cart Summery
+          </Typography>
+          <Typography variant="h7" component="h2" gutterBottom>
+            Total
+          </Typography>
+          <Typography color="textSecondary" gutterBottom>
+            {totalItems} items
+          </Typography>
+          <Typography color="initial" >
+            Rs.{totalPrice}.00
+          </Typography>
+        </CardContent>
+        <button className="btn btn-primary">Confirm oder</button>
+      </Card>
+    </div>
+  );
+}
+
+const mapStateProps = (state) => {
+  return {
+    cart: state.shop.cart
   }
 }
 
-export default Cart;
+export default connect(mapStateProps)(Cart);

@@ -43,7 +43,7 @@ class ProductUpdate extends Component {
 
         let product = { id: this.state.id, name: values.name, price: values.price, description: values.description, url: values.url }
 
-        if (this.state.id != -1) {
+        if (this.state.id !== -1) {
             ProductDataService.updateProduct(this.state.id, product)
                 .then(() => this.props.history.push(`/product/${this.state.id}`))
         }

@@ -3,38 +3,47 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card } from 'react-bootstrap'
 import './ProductCard.css'
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { connect } from 'react-redux';
+import { addToCart } from '../../redux/shoping/shopping-action'
+import IconButton from '@material-ui/core/IconButton';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import Button from '@material-ui/core/Button';
 
-function ProductCard(props) {
-    const [products] = useState(
-        {
-           id:props.product.id,
-           name:props.product.name,
-           price:props.product.price,
-           url:props.product.url 
-        }
-    )
+function ProductCard({ product, addToCart }) {
 
-    const addToCart = (products) => {
-        props.cartCount.cartCount(1, products)
-    };
     return (
-        <Card style={{ width: '18rem' }} key={props.product.id} className="box">
-            <Link to={`product/${props.product.id}`}>
-                <Card.Img variant="top" src={props.product.url} />
+        <Card style={{ width: '18rem' }} key={product.id} className="box">
+            <Link to={`product/${product.id}`}>
+                <Card.Img variant="top" src={product.url} />
             </Link>
             <Card.Body>
-                <Link className="nav-link link-dark" to={`product/${props.product.id}`} ><Card.Title>{props.product.name}</Card.Title></Link>
+                <Link className="nav-link link-dark" to={`product/${product.id}`} >
+                    <Card.Title>{product.name}</Card.Title>
+                </Link>
                 <Card.Text>
-                    {props.product.description}
+                    {product.description}
                 </Card.Text>
                 <Card.Text>
-                    Rs.{props.product.price}.00
+                    Rs.{product.price}.00
                 </Card.Text>
             </Card.Body>
-            <button className="btn btn-success" onClick={() => addToCart(products)}>Add to Cart</button>
+            <Button
+                variant="contained"
+                color='inherit'
+                startIcon={<AddShoppingCartIcon />}
+                onClick={() => addToCart(product.id)}
+            >
+                Add to cart
+            </Button>
+            {/* <button className="btn btn-success" onClick={() => addToCart(product.id)}>Add to Cart</button> */}
         </Card>
     );
 }
 
-export default ProductCard
+const mapDispatchProps = (dispatch) => {
+    return {
+        addToCart: (id) => dispatch(addToCart(id))
+    }
+}
+
+export default connect(null, mapDispatchProps)(ProductCard)
