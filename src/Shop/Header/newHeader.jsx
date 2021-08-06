@@ -4,11 +4,9 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
 import Header from './Header'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { connect } from 'react-redux';
@@ -94,7 +92,7 @@ function PrimarySearchAppBar({ cart }) {
         setAnchorEl(null);
     };
 
-    const [cartCount, setCartCount] = useState(0);    
+    const [cartCount, setCartCount] = useState(0);
 
     useEffect(() => {
         let count = 0;
@@ -115,7 +113,7 @@ function PrimarySearchAppBar({ cart }) {
                         aria-label="open drawer"
                         onClick={handleClick}
                     >
-                        <MenuIcon/>
+                        <MenuIcon />
                     </IconButton>
                     <Menu
                         id="simple-menu"
@@ -124,38 +122,25 @@ function PrimarySearchAppBar({ cart }) {
                         open={Boolean(anchorEl)}
                         onClose={handleClose}
                     >
-                        <Header/>
+                        <Header />
                     </Menu>
-                    <Typography className={classes.title} variant="h6" noWrap>
-                        Material-UI
+                    <Typography variant="h6" noWrap>
+                        Freshland Dairy
                     </Typography>
-                    <div className={classes.search}>
-                        <div className={classes.searchIcon}>
-                            <SearchIcon/>
-                        </div>
-                        <InputBase
-                            placeholder="Search…"
-                            classes={{
-                                root: classes.inputRoot,
-                                input: classes.inputInput,
-                            }}
-                            inputProps={{ 'aria-label': 'search' }}
-                        />
-                    </div>
                     <div className={classes.grow} />
-                    <IconButton 
+                    <IconButton
                         aria-label="account of current user"
                         aria-controls="menu-appbar"
                         aria-haspopup="true"
                         color="inherit"
-                        >
-                            
-                            {isUserLoggedin && <Link to={'/cart'} className="nav-link">
+                    >
+
+                        {isUserLoggedin && <Link to={'/cart'} className="nav-link">
                             <Badge badgeContent={cartCount} color="secondary" >
                                 <ShoppingCartIcon />
                             </Badge>
                         </Link>}
-                    </IconButton>                   
+                    </IconButton>
                 </Toolbar>
             </AppBar>
         </div>

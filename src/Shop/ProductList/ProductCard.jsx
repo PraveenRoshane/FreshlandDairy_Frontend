@@ -1,11 +1,10 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Card } from 'react-bootstrap'
-import './ProductCard.css'
+import { Card } from 'react-bootstrap';
+import './ProductCard.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addToCart } from '../../redux/shoping/shopping-action'
-import IconButton from '@material-ui/core/IconButton';
+import { addToCart } from '../../redux/shoping/shopping-action';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import Button from '@material-ui/core/Button';
 
