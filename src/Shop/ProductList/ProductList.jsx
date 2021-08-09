@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import ProductCard from './ProductCard';
 import { Link } from 'react-router-dom';
 import ProductDataService from '../../API/ProductDataService';
-import { Fab } from '@material-ui/core';
+import { Fab, Slide } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux';
@@ -56,6 +56,14 @@ const useStyles = makeStyles((theme) => ({
             },
         },
     },
+    fab: {
+        margin: theme.spacing(2),
+    },
+    absolute: {
+        position: 'fixed',
+        bottom: theme.spacing(3),
+        right: theme.spacing(3),
+    },
 }));
 
 function ProductList({ products, setProducts }) {
@@ -81,7 +89,7 @@ function ProductList({ products, setProducts }) {
     }
 
     return (
-        <div className="container">
+        <div className="container" >
             <div className={classes.search}>
                 <div className={classes.searchIcon}>
                     <SearchIcon />
@@ -96,15 +104,22 @@ function ProductList({ products, setProducts }) {
                     onChange={e => setSearchResult(e.target.value)}
                 />
             </div>
+            <br />
             <Grid container spacing={3}>
-                {products.filter((value) => searchProduct(value)).map((Product) => (<ProductCard product={Product} key={Product.id} />))}
+                {products.filter((value) => searchProduct(value)).map((Product) => (
+                    <Grid item key={Product.id} xs={12} md={6} lg={3}>
+                        <ProductCard product={Product} />
+                    </Grid>
+                ))}
             </Grid>
-            <Link to={`productUpdate/-1`} style={{ textDecoration: 'none' }}>
-                <Fab color="primary" aria-label="add" variant="extended">
-                    <AddIcon />Add New Product
-                </Fab>
-            </Link>
-            <br /><br />
+            <Slide direction="up" in={true} mountOnEnter unmountOnExit>
+                <Link to={`productUpdate/-1`} style={{ textDecoration: 'none' }}>
+                    <Fab color='secondary' aria-label="add" className={classes.absolute} title='Add Products'>
+                        <AddIcon />
+                    </Fab>
+                </Link>
+            </Slide>
+            <br/>
         </div>
     );
 

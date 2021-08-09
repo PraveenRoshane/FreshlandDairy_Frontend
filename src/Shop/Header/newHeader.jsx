@@ -135,9 +135,9 @@ function PrimarySearchAppBar({ cart }) {
                         color="inherit"
                     >
 
-                        {isUserLoggedin && <Link to={'/cart'} className="nav-link">
+                        {isUserLoggedin && <Link to={'/cart'} className="nav-link" >
                             <Badge badgeContent={cartCount} color="secondary" >
-                                <ShoppingCartIcon />
+                                <ShoppingCartIcon style={{color:'white'}}/>
                             </Badge>
                         </Link>}
                     </IconButton>

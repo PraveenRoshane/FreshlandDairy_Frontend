@@ -1,41 +1,48 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Card } from 'react-bootstrap';
 import './ProductCard.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addToCart } from '../../redux/shoping/shopping-action';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import ShareIcon from '@material-ui/icons/Share';
 import Button from '@material-ui/core/Button';
+import { Avatar, Card, CardActionArea, CardContent, CardHeader, CardMedia, IconButton, Typography, Zoom } from '@material-ui/core';
 
 function ProductCard({ product, addToCart }) {
 
     return (
-        <Card style={{ width: '18rem' }} key={product.id} className="box">
-            <Link to={`product/${product.id}`}>
-                <Card.Img variant="top" src={product.url} />
-            </Link>
-            <Card.Body>
-                <Link className="nav-link link-dark" to={`product/${product.id}`} >
-                    <Card.Title>{product.name}</Card.Title>
+        <Zoom in={true} style={{ transitionDelay: true ? '150ms' : '0ms' }} timeout={{ enter: '750ms' }}>
+            <Card key={product.id} elevation={10}>
+                <CardHeader
+                    avatar={<Avatar variant='circle' style={{backgroundColor:'orange'}}>A</Avatar>}
+                    title={product.name}
+                    action={
+                        <IconButton aria-label="share">
+                            <ShareIcon color='secondary' />
+                        </IconButton>}
+                />
+                <Link to={`product/${product.id}`}>                    
+                    <CardMedia title={product.name}>
+                        <img src={product.url} width="75%" />
+                    </CardMedia>
                 </Link>
-                <Card.Text>
-                    {product.description}
-                </Card.Text>
-                <Card.Text>
-                    Rs.{product.price}.00
-                </Card.Text>
-            </Card.Body>
-            <Button
-                variant="contained"
-                color='inherit'
-                startIcon={<AddShoppingCartIcon />}
-                onClick={() => addToCart(product.id)}
-            >
-                Add to cart
-            </Button>
-            {/* <button className="btn btn-success" onClick={() => addToCart(product.id)}>Add to Cart</button> */}
-        </Card>
+                <CardContent>
+                    <Typography variant='h6' color='textSecondary' gutterBottom>
+                        Rs.{product.price}.00
+                    </Typography>
+                    <Button
+                    variant='contained'
+                    startIcon={<AddShoppingCartIcon />}
+                    onClick={() => addToCart(product.id)}
+                    color='primary'
+                >
+                    Add to cart
+                </Button>
+                </CardContent>
+                
+            </Card>
+        </Zoom>
     );
 }
 
