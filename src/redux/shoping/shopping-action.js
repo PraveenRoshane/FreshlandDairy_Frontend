@@ -36,4 +36,17 @@ export const setProducts = (Products) => {
         type: actionTypes.SET_PRODUCTS,
         payload: Products
     }
+}
+
+export const setAddress = (Address) => {
+    return {
+        type: actionTypes.SET_ADDRESS,
+        payload: Address
+    }
+}
+export const setActiveStep = (ActiveStep) => {
+    return {
+        type: actionTypes.SET_ACTIVESTEP,
+        payload: ActiveStep
+    }
 };

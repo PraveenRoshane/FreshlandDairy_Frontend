@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import Badge from '@material-ui/core/Badge';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
@@ -21,8 +22,9 @@ import ShoppingCartRoundedIcon from '@material-ui/icons/ShoppingCartRounded';
 import PhoneRoundedIcon from '@material-ui/icons/PhoneRounded';
 import MeetingRoomRoundedIcon from '@material-ui/icons/MeetingRoomRounded';
 import NoMeetingRoomRoundedIcon from '@material-ui/icons/NoMeetingRoomRounded';
-import { withRouter } from 'react-router-dom';
-import Authentication from '../Authentication.js';
+import { useHistory, withRouter } from 'react-router-dom';
+import Authentication from '../../API/Authentication';
+import { connect } from 'react-redux';
 
 const drawerWidth = 180;
 
@@ -88,12 +90,19 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function AppDrawer(props) {
-    const { history } = props;
+function AppDrawer({ cart }) {
+    const history = useHistory();
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
     const isUserLoggedin = Authentication.isUserLoggedin();
+    const [cartCount, setCartCount] = useState(0);
+
+    useEffect(() => {
+        let count = 0;
+        cart.forEach((item) => { count += item.qty });
+        setCartCount(count)
+    }, [cart, cartCount])
     
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -118,12 +127,12 @@ function AppDrawer(props) {
         text: 'Store',
         icon: <StorefrontRoundedIcon />,
         status: isUserLoggedin,
-        onClick: () => history.push('/ProductList')
+        onClick: () => history.push('/Online-Shop')
     }, {
         text: 'Cart',
-        icon: <ShoppingCartRoundedIcon />,
+        icon: <Badge badgeContent={cartCount} color="secondary" ><ShoppingCartRoundedIcon /></Badge>,
         status: isUserLoggedin,
-        onClick: () => history.push('/cart')
+        onClick: () => history.push('/Online-Shop/cart')
     }, {
         text: 'Contact',
         icon: <PhoneRoundedIcon />,
@@ -222,4 +231,10 @@ function AppDrawer(props) {
     )
 }
 
-export default withRouter(AppDrawer)
+const mapStateProps = (state) => {
+    return {
+        cart: state.shop.cart
+    }
+}
+
+export default connect(mapStateProps)(withRouter(AppDrawer))

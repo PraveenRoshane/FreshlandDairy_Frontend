@@ -4,9 +4,11 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
 import CartItem from './CartItem';
+import { useHistory } from 'react-router-dom';
 
 function Cart({ cart }) {
 
+  const history = useHistory();
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
 
@@ -17,36 +19,46 @@ function Cart({ cart }) {
     cart.forEach( item => {
       item1 += item.qty;
       price1 += item.qty * item.price
-      console.log(item.price)
     })
 
     setTotalPrice(price1)
-    setTotalItems(item1)
-    console.log(price1)
+    setTotalItems(item1) 
 
   },[cart,totalPrice,totalItems,setTotalPrice,setTotalItems])
+
+  const confirmOrder = () => {
+    //console.log("FDO"+"-"+Math.floor(Math.random()*10000))
+
+    // let Order = { transactionID: 1001, customerID: 1, customerName: 'kamal', amount: totalPrice }
+    // console.log(Order)
+    // ShopOrderService.addOrder(Order)
+    // .then()
+
+    history.push("/Online-Shop/ShopOrder/Shiping-Address")
+    
+  }
 
   return (
     <div className="Cart">
       <div className="CartItem">
-        {cart.map((product) => (<CartItem item={product} key={cart.id} />))}
+        {cart.map((product, index) => (<CartItem item={product} key={index}/>))}
       </div>
       <Card>
         <CardContent>
           <Typography color="textSecondary" gutterBottom variant="h5" component="h2">
             Cart Summery
           </Typography>
-          <Typography variant="h7" component="h2" gutterBottom>
+          <Typography variant="h6" component="h2" gutterBottom>
             Total
           </Typography>
           <Typography color="textSecondary" gutterBottom>
             {totalItems} items
           </Typography>
-          <Typography color="initial" >
+          <Typography color="initial" gutterBottom>
             Rs.{totalPrice}.00
           </Typography>
+          <button className="btn btn-primary" onClick={confirmOrder}>Confirm oder</button>
         </CardContent>
-        <button className="btn btn-primary">Confirm oder</button>
       </Card>
     </div>
   );

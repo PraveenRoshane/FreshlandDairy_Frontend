@@ -1,5 +1,5 @@
 function ErrorMessage() {
-    return <div>ERROR Poddak check karala balapan</div>
+    return <div>ERROR has been occred plesas check</div>
   } 
 
 export default ErrorMessage

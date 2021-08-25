@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import './login.css';
-import Authentication from '../Authentication';
+import Authentication from '../API/Authentication';
 
 class Login extends Component {
 
@@ -27,7 +27,8 @@ class Login extends Component {
             .then(
                 (response) => {
                     Authentication.registerSuccessfulLoginForJwt(this.state.username, response.data.token)
-                    this.props.history.push('/ProductList')
+                    // this.props.history.push('/ProductList')
+                    this.props.history.push('/Online-Shop')                    
                 }
             ).catch(
                 () => {

@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { useEffect } from 'react';
 import ProductCard from './ProductCard';
 import { Link } from 'react-router-dom';
@@ -113,7 +115,7 @@ function ProductList({ products, setProducts }) {
                 ))}
             </Grid>
             <Slide direction="up" in={true} mountOnEnter unmountOnExit>
-                <Link to={`productUpdate/-1`} style={{ textDecoration: 'none' }}>
+                <Link to={`/Online-Shop/productUpdate/-1`} style={{ textDecoration: 'none' }}>
                     <Fab color='secondary' aria-label="add" className={classes.absolute} title='Add Products'>
                         <AddIcon />
                     </Fab>

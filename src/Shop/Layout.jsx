@@ -1,6 +1,5 @@
 import React from 'react'
-import Footer from './Footer/Footer'
-import PrimarySearchAppBar from './Header/newHeader'
+import Footer from '../Footer/Footer'
 import { makeStyles } from '@material-ui/core/styles';
 import AppDrawer from './Header/AppDrawer';
 

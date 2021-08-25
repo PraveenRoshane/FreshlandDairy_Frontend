@@ -71,7 +71,7 @@ function CartItem({ item, removeFromCart, adjustQty }) {
                                             </Typography>
                                         </Grid>
                                         <div style={{ alignSelf: 'center' }}>
-                                            <input style={{ width: 60 }} type="number" class="form-control" id="inputPassword2" placeholder="1" min="1" value={item.qty} onChange={onChangeHandler} />
+                                            <input style={{ width: 60 }} type="number" className="form-control" id="inputPassword2" placeholder="1" min="1" value={item.qty} onChange={onChangeHandler} />
                                         </div>
                                         <Grid item>
                                             <Tooltip title="Delete">

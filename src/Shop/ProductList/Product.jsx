@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card, Button } from 'react-bootstrap';
 import { withRouter } from 'react-router';
 import ProductDataService from '../../API/ProductDataService';
+import RatingComponent from '../Rating/RatingComponent';
 
 class Product extends Component {
 
@@ -28,12 +29,12 @@ class Product extends Component {
 
     deleteProductClick(id) {
         ProductDataService.deleteProduct(id)
-            .then(this.props.history.push('/ProductList'))
+            .then(this.props.history.push('/Online-Shop//ProductList'))
 
     }
 
     updateProductClick(id) {
-        this.props.history.push(`/productUpdate/${id}`)
+        this.props.history.push(`/Online-Shop/productUpdate/${id}`)
     }
 
     render() {
@@ -48,6 +49,7 @@ class Product extends Component {
                     <Card.Text>
                         Rs.{this.state.price}.00
                     </Card.Text>
+                    <RatingComponent Product={this.state.name}/>
                     <Button variant="success" style={{ float: 'left' }} onClick={() => this.updateProductClick(this.state.id)}>Update</Button>
                     <Button variant="warning" style={{ float: 'Right' }} onClick={() => this.deleteProductClick(this.state.id)}>Delete</Button>
                 </Card.Body>

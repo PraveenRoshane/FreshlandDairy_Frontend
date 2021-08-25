@@ -19,8 +19,8 @@ class ProductDataService {
         return axios.put(`${JPA_API_URL}/shop/products/${id}`, Product);
     }
 
-    addTodo(todo){
-        return axios.post(`${JPA_API_URL}/shop/products`, todo);
+    addProduct(Product){
+        return axios.post(`${JPA_API_URL}/shop/products`, Product);
     }
 
 }

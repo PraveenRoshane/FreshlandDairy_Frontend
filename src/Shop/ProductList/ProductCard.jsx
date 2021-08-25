@@ -1,30 +1,28 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './ProductCard.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addToCart } from '../../redux/shoping/shopping-action';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import ShareIcon from '@material-ui/icons/Share';
 import Button from '@material-ui/core/Button';
-import { Avatar, Card, CardActionArea, CardContent, CardHeader, CardMedia, IconButton, Typography, Zoom } from '@material-ui/core';
+import { Avatar, Card, CardContent, CardHeader, CardMedia, IconButton, Typography, Zoom } from '@material-ui/core';
 
 function ProductCard({ product, addToCart }) {
 
     return (
-        <Zoom in={true} style={{ transitionDelay: true ? '150ms' : '0ms' }} timeout={{ enter: '750ms' }}>
+        <Zoom in={true} style={{ transitionDelay: true ? '150ms' : '0ms' }} timeout={{enter:700}}>
             <Card key={product.id} elevation={10}>
                 <CardHeader
-                    avatar={<Avatar variant='circle' style={{backgroundColor:'orange'}}>A</Avatar>}
+                    avatar={<Avatar variant="circular" style={{backgroundColor:'orange'}}>A</Avatar>}
                     title={product.name}
                     action={
                         <IconButton aria-label="share">
                             <ShareIcon color='secondary' />
                         </IconButton>}
                 />
-                <Link to={`product/${product.id}`}>                    
+                <Link to={`/Online-Shop/product/${product.id}`}>                    
                     <CardMedia title={product.name}>
-                        <img src={product.url} width="75%" />
+                        <img alt='' src={product.url} width="250dp" height="250dp"/>
                     </CardMedia>
                 </Link>
                 <CardContent>

@@ -1,11 +1,11 @@
 import './App.css';
 import './bootstrap.css';
-import ShopMain from './Shop/ShopMain';
+import HomeRoute from './HomeRoute';
 
 function App() {
   return (
-    <div className="App">     
-      <ShopMain></ShopMain>
+    <div className="App">
+      <HomeRoute />
     </div>
   );
 }

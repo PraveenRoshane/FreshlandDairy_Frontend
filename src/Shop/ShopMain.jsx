@@ -1,36 +1,22 @@
 import { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Login from './Login/Login';
-import LogoutComponent from './LogoutComponent';
-import AuthenticatedRoute from './AuthenticatedRoute';
-import ErrorMessage from './ErrorMessage';
+import AuthenticatedRoute from '../AuthenticatedRoute';
 import ProductList from './ProductList/ProductList';
 import Product from './ProductList/Product';
 import ProductUpdate from './ProductList/ProductUpdate';
 import Cart from './Cart/Cart';
-import Layout from './Layout';
+import Checkout from './ShopOrder/Checkout';
 
 class ShopMain extends Component {
   render() {
     return (
-      <div className="ShopMain">
-        <Router>
-          <>
-            <Layout>
-              <Switch>
-                <Route path="/" exact component={Login} />
-                <Route path="/login" exact component={Login} />
-                <AuthenticatedRoute path="/ProductList" exact component={ProductList} />
-                <AuthenticatedRoute path="/product/:id" exact component={Product} />
-                <AuthenticatedRoute path="/productUpdate/:id" exact component={ProductUpdate} />
-                <AuthenticatedRoute path="/cart" exact component={Cart} />
-                <AuthenticatedRoute path="/logout" exact component={LogoutComponent} />
-                <Route component={ErrorMessage} />
-              </Switch>
-            </Layout>
-          </>
-        </Router>
-      </div>
+      <>
+        <AuthenticatedRoute path="/Online-Shop" exact component={ProductList} />
+        <AuthenticatedRoute path="/Online-Shop/ProductList" exact component={ProductList} />
+        <AuthenticatedRoute path="/Online-Shop/product/:id" exact component={Product} />
+        <AuthenticatedRoute path="/Online-Shop/productUpdate/:id" exact component={ProductUpdate} />
+        <AuthenticatedRoute path="/Online-Shop/cart" exact component={Cart} />
+        <AuthenticatedRoute path="/Online-Shop/ShopOrder/Shiping-Address" exact component={Checkout} />
+      </>
     );
   }
 }
