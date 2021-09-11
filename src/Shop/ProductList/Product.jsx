@@ -1,9 +1,10 @@
 import { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Card, Button } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { withRouter } from 'react-router';
 import ProductDataService from '../../API/ProductDataService';
 import RatingComponent from '../Rating/RatingComponent';
+import { Zoom } from '@material-ui/core';
 
 class Product extends Component {
 
@@ -17,9 +18,6 @@ class Product extends Component {
             description: '',
             url: ''
         }
-
-        this.deleteProductClick = this.deleteProductClick.bind(this)
-        this.updateProductClick = this.updateProductClick.bind(this)
     }
 
     componentDidMount() {
@@ -27,19 +25,15 @@ class Product extends Component {
             .then(response => this.setState({ name: response.data.name, price: response.data.price, description: response.data.description, url: response.data.url }))
     }
 
-    deleteProductClick(id) {
-        ProductDataService.deleteProduct(id)
-            .then(this.props.history.push('/Online-Shop//ProductList'))
-
-    }
-
-    updateProductClick(id) {
-        this.props.history.push(`/Online-Shop/productUpdate/${id}`)
+    componentDidUpdate() {
+        ProductDataService.RerieveProduct(this.state.id)
+            .then(response => this.setState({ name: response.data.name, price: response.data.price, description: response.data.description, url: response.data.url }))
     }
 
     render() {
         return (
-            <Card style={{ width: '18rem', marginLeft: 'auto', marginRight: 'auto' }} key={this.state.id} className="box">
+            <Zoom in={true} style={{ transitionDelay: true ? '150ms' : '0ms' }} timeout={{enter:700}}>
+            <Card style={{ width: '18rem', marginLeft: 'auto', marginRight: 'auto', borderRadius: '15px' }} key={this.state.id} className="box">
                 <Card.Img variant="top" src={this.state.url} />
                 <Card.Body>
                     <Card.Title>{this.state.name}</Card.Title>
@@ -47,13 +41,12 @@ class Product extends Component {
                         {this.state.description}
                     </Card.Text>
                     <Card.Text>
-                        Rs.{this.state.price}.00
+                        Rs.{parseFloat(this.state.price).toFixed(2)}
                     </Card.Text>
                     <RatingComponent Product={this.state.name}/>
-                    <Button variant="success" style={{ float: 'left' }} onClick={() => this.updateProductClick(this.state.id)}>Update</Button>
-                    <Button variant="warning" style={{ float: 'Right' }} onClick={() => this.deleteProductClick(this.state.id)}>Delete</Button>
                 </Card.Body>
             </Card>
+            </Zoom>
         );
     }
 

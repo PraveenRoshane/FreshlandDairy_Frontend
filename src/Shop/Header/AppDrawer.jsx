@@ -25,6 +25,8 @@ import NoMeetingRoomRoundedIcon from '@material-ui/icons/NoMeetingRoomRounded';
 import { useHistory, withRouter } from 'react-router-dom';
 import Authentication from '../../API/Authentication';
 import { connect } from 'react-redux';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import ListRoundedIcon from '@material-ui/icons/ListRounded';
 
 const drawerWidth = 180;
 
@@ -103,7 +105,7 @@ function AppDrawer({ cart }) {
         cart.forEach((item) => { count += item.qty });
         setCartCount(count)
     }, [cart, cartCount])
-    
+
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -127,7 +129,7 @@ function AppDrawer({ cart }) {
         text: 'Store',
         icon: <StorefrontRoundedIcon />,
         status: isUserLoggedin,
-        onClick: () => history.push('/Online-Shop')
+        onClick: () => history.push('/Online-Shop/ProductList')
     }, {
         text: 'Cart',
         icon: <Badge badgeContent={cartCount} color="secondary" ><ShoppingCartRoundedIcon /></Badge>,
@@ -138,6 +140,19 @@ function AppDrawer({ cart }) {
         icon: <PhoneRoundedIcon />,
         status: true,
         onClick: () => history.push('/')
+    }, 
+    ];
+
+    const navMidList = [{
+        text: 'Dashboard',
+        icon: <DashboardIcon />,
+        status: isUserLoggedin,
+        onClick: () => history.push('/Online-Shop/Dashboard')
+    }, {
+        text: 'Product List',
+        icon: <ListRoundedIcon />,
+        status: isUserLoggedin,
+        onClick: () => history.push('/Online-Shop/ProductManagement')
     },
     ];
 
@@ -145,18 +160,17 @@ function AppDrawer({ cart }) {
         text: 'Login',
         icon: <MeetingRoomRoundedIcon />,
         status: !isUserLoggedin,
-        onClick: () => history.push('/login')
+        onClick: () => history.push('/Online-Shop/login')
     }, {
         text: 'Logout',
         icon: <NoMeetingRoomRoundedIcon />,
         status: isUserLoggedin,
         onClick: () => logout()
     }
-    ];    
+    ];
 
     return (
         <div>
-            <CssBaseline />
             <AppBar
                 position='fixed'
                 className={clsx(classes.appBar, {
@@ -176,7 +190,7 @@ function AppDrawer({ cart }) {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap>
-                        Mini variant drawer
+                        Freshland Dairy
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -204,6 +218,18 @@ function AppDrawer({ cart }) {
                 <Divider variant='middle' />
                 <List>
                     {navUpList.map((item, index) => {
+                        const { text, icon, onClick, status } = item;
+                        return (
+                            <ListItem button key={text} onClick={onClick} disabled={!status}>
+                                {icon && <ListItemIcon>{icon}</ListItemIcon>}
+                                <ListItemText primary={text} />
+                            </ListItem>
+                        )
+                    })}
+                </List>
+                <Divider variant='middle' />
+                <List>
+                    {navMidList.map((item, index) => {
                         const { text, icon, onClick, status } = item;
                         return (
                             <ListItem button key={text} onClick={onClick} disabled={!status}>

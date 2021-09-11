@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React, {useEffect, useState} from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -27,15 +29,7 @@ function Cart({ cart }) {
   },[cart,totalPrice,totalItems,setTotalPrice,setTotalItems])
 
   const confirmOrder = () => {
-    //console.log("FDO"+"-"+Math.floor(Math.random()*10000))
-
-    // let Order = { transactionID: 1001, customerID: 1, customerName: 'kamal', amount: totalPrice }
-    // console.log(Order)
-    // ShopOrderService.addOrder(Order)
-    // .then()
-
-    history.push("/Online-Shop/ShopOrder/Shiping-Address")
-    
+    history.push("/Online-Shop/ShopOrder/Shiping-Address")    
   }
 
   return (
@@ -57,7 +51,7 @@ function Cart({ cart }) {
           <Typography color="initial" gutterBottom>
             Rs.{totalPrice}.00
           </Typography>
-          <button className="btn btn-primary" onClick={confirmOrder}>Confirm oder</button>
+          <button className="btn btn-primary" onClick={confirmOrder} disabled={(totalItems == 0)}>Confirm oder</button>
         </CardContent>
       </Card>
     </div>

@@ -28,7 +28,7 @@ class Login extends Component {
                 (response) => {
                     Authentication.registerSuccessfulLoginForJwt(this.state.username, response.data.token)
                     // this.props.history.push('/ProductList')
-                    this.props.history.push('/Online-Shop')                    
+                    this.props.history.push('/Online-Shop/ProductList')                    
                 }
             ).catch(
                 () => {
@@ -51,8 +51,8 @@ class Login extends Component {
                                     <h3 className="mb-5 text-center heading">We are Freshland Dairy</h3>
                                     <h6 className="msg-info">Please login to your account</h6>
                                     {this.state.LoginFail && <div className="alert alert-warning">Invalid Credentials</div>}
-                                    <div className="form-group"> <label className="form-control-label text-muted">Username</label> <input type="text" id="email" name="username" placeholder="Username" className="form-control" value={this.state.username} onChange={this.handleChange} /></div>
-                                    <div className="form-group"> <label className="form-control-label text-muted">Password</label> <input type="password" id="psw" name="password" placeholder="Password" className="form-control" value={this.state.password} onChange={this.handleChange} /> </div>
+                                    <div className="form-group"> <label className="label">Username</label><input type="text" id="email" name="username" placeholder="Username" className="textarea" value={this.state.username} onChange={this.handleChange} /></div>
+                                    <div className="form-group"> <label className="label">Password</label> <input type="password" id="psw" name="password" placeholder="Password" className="textarea" value={this.state.password} onChange={this.handleChange} /> </div><br/>
                                     <div className="row justify-content-center my-3 px-3"> <button className="btn-block btn-color" onClick={this.loginclick}>Login</button> </div>
                                     <div className="row justify-content-center my-2"> <a href="/Login"><small className="text-muted">Forgot Password?</small></a> </div>
                                 </div>

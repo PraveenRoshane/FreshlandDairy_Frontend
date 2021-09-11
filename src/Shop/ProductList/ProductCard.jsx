@@ -10,35 +10,33 @@ import { Avatar, Card, CardContent, CardHeader, CardMedia, IconButton, Typograph
 function ProductCard({ product, addToCart }) {
 
     return (
-        <Zoom in={true} style={{ transitionDelay: true ? '150ms' : '0ms' }} timeout={{enter:700}}>
+        <Zoom in={true} style={{ transitionDelay: true ? '150ms' : '0ms' }} timeout={{ enter: 700 }}>
             <Card key={product.id} elevation={10}>
                 <CardHeader
-                    avatar={<Avatar variant="circular" style={{backgroundColor:'orange'}}>A</Avatar>}
+                    avatar={ product.quantity <= 10 ?  <Avatar variant="circular" style={{ backgroundColor: 'Red' }}>S</Avatar> : <Avatar variant="circular" style={{ backgroundColor: 'orange' }}>A</Avatar>}
                     title={product.name}
-                    action={
-                        <IconButton aria-label="share">
-                            <ShareIcon color='secondary' />
-                        </IconButton>}
+                    action={<IconButton aria-label="share"><ShareIcon /></IconButton>}
                 />
-                <Link to={`/Online-Shop/product/${product.id}`}>                    
+                <Link to={`/Online-Shop/product/${product.id}`}>
                     <CardMedia title={product.name}>
-                        <img alt='' src={product.url} width="250dp" height="250dp"/>
+                        <img alt='' src={product.url} width="250dp" height="250dp" />
                     </CardMedia>
                 </Link>
                 <CardContent>
                     <Typography variant='h6' color='textSecondary' gutterBottom>
-                        Rs.{product.price}.00
+                        Rs.{parseFloat(product.price).toFixed(2)}
                     </Typography>
                     <Button
-                    variant='contained'
-                    startIcon={<AddShoppingCartIcon />}
-                    onClick={() => addToCart(product.id)}
-                    color='primary'
-                >
-                    Add to cart
-                </Button>
+                        variant='contained'
+                        startIcon={<AddShoppingCartIcon />}
+                        onClick={() => addToCart(product.id)}
+                        color='primary'
+                        disabled={product.quantity <= 10}
+                    >
+                        Add to cart
+                    </Button>
                 </CardContent>
-                
+
             </Card>
         </Zoom>
     );

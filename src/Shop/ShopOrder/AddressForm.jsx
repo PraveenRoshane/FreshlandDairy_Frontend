@@ -51,7 +51,7 @@ const validationSchema = yup.object({
   firstName: yup.string().required("Name is required"),
   address: yup.string().required("Delivary address is required"),
   email: yup.string().email("Enter valid email").required("Email is required"),
-  number: yup.number().required("Contact number is required")
+  number: yup.number().typeError("Enter valid Number").required("Contact number is required")
 })
 
 function AddressForm({ setAddress, active1, address }) {

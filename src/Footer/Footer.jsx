@@ -59,7 +59,7 @@ class Footer extends Component {
                     <hr className="p-0 m-0 b-0"></hr>
                     <div className="bg-light py-2">
                         <div className="container text-center">
-                            <p className="text-muted mb-0 py-2">© 2021 Freshland Dairy All risghts reserved.</p>
+                            <p className="text-muted mb-0 py-2">©{new Date().getFullYear()} Freshland Dairy All risghts reserved.</p>
                         </div>
                     </div>
                 </footer>

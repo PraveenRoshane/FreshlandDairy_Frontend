@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     marginTop: theme.spacing(2),
+    fontWeight: 600
   },
   table: {
     minWidth: 500,
@@ -72,7 +73,7 @@ function Review({ cart, address }) {
               <TableRow key={row.name}>
                 <TableCell align='left'>{(row.name).toLowerCase()}</TableCell>
                 <TableCell align='center'>{row.qty}</TableCell>
-                <TableCell align='right'>{row.price * row.qty}</TableCell>
+                <TableCell align='right'>{ parseFloat(row.price * row.qty).toFixed(2) }</TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -82,7 +83,7 @@ function Review({ cart, address }) {
         <ListItem className={classes.listItem}>
           <ListItemText primary="Total" className={classes.listItem} />
           <Typography variant="subtitle1" className={classes.total}>
-            Rs.{totalPrice}
+            Rs.{ parseFloat(totalPrice).toFixed(2)}
           </Typography>
         </ListItem>
       </List>

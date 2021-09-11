@@ -7,7 +7,7 @@ class AuthenticatedRoute extends Component{
         if(Authentication.isUserLoggedin()){
             return <Route {...this.props}/>
         }else{
-            return <Redirect to = "./Login" />
+            return <Redirect to = "/Online-Shop/login" />
         }
     }
 }

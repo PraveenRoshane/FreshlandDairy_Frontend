@@ -8,6 +8,9 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import AddressForm from './AddressForm';
 import Review from './Review';
+import ShopOrderService from '../../API/ShopOrderService';
+import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -48,12 +51,22 @@ const useStyles = makeStyles((theme) => ({
 
 const steps = ['Shipping address', 'Review your order'];
 
-function Checkout() {
+function Checkout({ address, cart}) {
   const classes = useStyles();
+  const history = useHistory();
   const [activeStep, setActiveStep] = useState(0);
 
   const handleNext = () => {
-    setActiveStep(activeStep + 1);
+    let Amount = 0;
+    cart.forEach( item => { Amount += item.qty * item.price })
+    var showDate = new Date();
+
+    let order = { customerID: 1000, customerName: address.firstName, address: address.address, email: address.email, number: address.number, amount: Amount, date: showDate }
+
+    ShopOrderService.addOrder(order)
+    .then(history.push("/Online-Shop/ShopOrder/Receipt"))
+
+
   };
 
   const handleBack = () => {
@@ -87,7 +100,6 @@ function Checkout() {
               </React.Fragment>
             ) : (
               <React.Fragment>
-                {console.log(activeStep)}
                 {activeStep === 0 ? <AddressForm active1={setActiveStep} /> :
                   <div>
                     <Review />
@@ -103,7 +115,7 @@ function Checkout() {
                         onClick={handleNext}
                         className={classes.button}
                       >
-                        {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
+                        Place order
                       </Button>
                     </div>
                   </div>}
@@ -116,4 +128,11 @@ function Checkout() {
   );
 }
 
-export default Checkout;
+const mapStateProps = (state) => {
+  return {
+    cart: state.shop.cart,
+    address: state.shop.address
+  }
+}
+
+export default connect(mapStateProps)(Checkout);

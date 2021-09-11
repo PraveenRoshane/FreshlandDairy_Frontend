@@ -14,6 +14,12 @@ export const removeFromCart = (itemID) => {
     }
 }
 
+export const removeAllFromCart = () => {
+    return {
+        type: actionTypes.REMOVE_ALL_FROM_CART
+    }
+}
+
 export const adjustQty = (itemID, value) => {
     return {
         type: actionTypes.ADJUST_QTY,

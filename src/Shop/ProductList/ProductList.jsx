@@ -2,10 +2,7 @@
 
 import { useEffect } from 'react';
 import ProductCard from './ProductCard';
-import { Link } from 'react-router-dom';
 import ProductDataService from '../../API/ProductDataService';
-import { Fab, Slide } from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
 import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux';
 import { setProducts } from '../../redux/shoping/shopping-action'
@@ -29,8 +26,8 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: '10px',
         width: '100%',
         [theme.breakpoints.up('sm')]: {
-            marginLeft: theme.spacing(52),
-            width: '35%',
+            marginLeft: theme.spacing(45),
+            width: '45%',
         },
     },
     searchIcon: {
@@ -78,7 +75,7 @@ function ProductList({ products, setProducts }) {
             .then(response => { setProducts(response.data) });
     }
 
-    useEffect(loaddata, [])
+    useEffect(loaddata, [products])
 
     const searchProduct = (value) => {
 
@@ -114,13 +111,6 @@ function ProductList({ products, setProducts }) {
                     </Grid>
                 ))}
             </Grid>
-            <Slide direction="up" in={true} mountOnEnter unmountOnExit>
-                <Link to={`/Online-Shop/productUpdate/-1`} style={{ textDecoration: 'none' }}>
-                    <Fab color='secondary' aria-label="add" className={classes.absolute} title='Add Products'>
-                        <AddIcon />
-                    </Fab>
-                </Link>
-            </Slide>
             <br/>
         </div>
     );
