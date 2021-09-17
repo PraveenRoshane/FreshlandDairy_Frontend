@@ -5,6 +5,7 @@ import { addToCart } from '../../redux/shoping/shopping-action';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import ShareIcon from '@material-ui/icons/Share';
 import Button from '@material-ui/core/Button';
+import Tooltip from '@material-ui/core/Tooltip';
 import { Avatar, Card, CardContent, CardHeader, CardMedia, IconButton, Typography, Zoom } from '@material-ui/core';
 
 function ProductCard({ product, addToCart }) {
@@ -13,7 +14,8 @@ function ProductCard({ product, addToCart }) {
         <Zoom in={true} style={{ transitionDelay: true ? '150ms' : '0ms' }} timeout={{ enter: 700 }}>
             <Card key={product.id} elevation={10}>
                 <CardHeader
-                    avatar={ product.quantity <= 10 ?  <Avatar variant="circular" style={{ backgroundColor: 'Red' }}>S</Avatar> : <Avatar variant="circular" style={{ backgroundColor: 'orange' }}>A</Avatar>}
+                    avatar={product.quantity <= 10 ? <Tooltip title="SOLD OUT"><Avatar variant="circular" style={{ backgroundColor: 'Red' }}>S</Avatar></Tooltip> :
+                    <Tooltip title="AVAILABLE"><Avatar variant="circular" style={{ backgroundColor: 'orange' }}>A</Avatar></Tooltip>}
                     title={product.name}
                     action={<IconButton aria-label="share"><ShareIcon /></IconButton>}
                 />
@@ -36,7 +38,6 @@ function ProductCard({ product, addToCart }) {
                         Add to cart
                     </Button>
                 </CardContent>
-
             </Card>
         </Zoom>
     );

@@ -10,7 +10,8 @@ const INITIAL_STATE = {
         email: "",
         number: ""
     },
-    activeStep: 1
+    activeStep: 1,
+    orders: [],
 }
 
 const shopReducer = (state = INITIAL_STATE, action) => {
@@ -25,7 +26,7 @@ const shopReducer = (state = INITIAL_STATE, action) => {
         case actionTypes.REMOVE_FROM_CART:
             return { ...state, cart: state.cart.filter(item => item.id !== action.payload.id) };
         case actionTypes.REMOVE_ALL_FROM_CART:
-            return { ...state, cart:[] };
+            return { ...state, cart: [] };
         case actionTypes.ADJUST_QTY:
             return { ...state, cart: state.cart.map(item => item.id === action.payload.id ? { ...item, qty: +action.payload.qty } : item) };
         case actionTypes.LOAD_CURRENT_ITEM:
@@ -34,6 +35,8 @@ const shopReducer = (state = INITIAL_STATE, action) => {
             return { ...state, address: action.payload };
         case actionTypes.SET_ACTIVESTEP:
             return { ...state, activeStep: action.payload };
+        case actionTypes.SET_ORDERS:
+            return { ...state, orders: action.payload }
         default:
             return state;
 

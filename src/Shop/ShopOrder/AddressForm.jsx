@@ -51,7 +51,7 @@ const validationSchema = yup.object({
   firstName: yup.string().required("Name is required"),
   address: yup.string().required("Delivary address is required"),
   email: yup.string().email("Enter valid email").required("Email is required"),
-  number: yup.number().typeError("Enter valid Number").required("Contact number is required")
+  number: yup.string().required("Contact number is required").matches(/^[0-9]+$/,"Invalid Number").min(10).max(10)
 })
 
 function AddressForm({ setAddress, active1, address }) {
@@ -84,7 +84,7 @@ function AddressForm({ setAddress, active1, address }) {
               required
               id="firstName"
               name="firstName"
-              label="First name"
+              label="Name"
               value={formik.values.firstName}
               onChange={formik.handleChange}
               error={formik.touched.firstName && Boolean(formik.errors.firstName)}

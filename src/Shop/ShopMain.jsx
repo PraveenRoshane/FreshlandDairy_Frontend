@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Route } from 'react-router-dom';
 import AuthenticatedRoute from '../AuthenticatedRoute';
 import ProductList from './ProductList/ProductList';
 import Product from './ProductList/Product';
@@ -16,8 +16,8 @@ class ShopMain extends Component {
     return (
       <>
         <Layout>
-          <Route path="/Online-Shop" exact component={ProductList} />
-          <Route path="/Online-Shop/ProductList" exact component={ProductList} />
+          <AuthenticatedRoute path="/Online-Shop" exact component={ProductList} />
+          <AuthenticatedRoute path="/Online-Shop/ProductList" exact component={ProductList} />
           <AuthenticatedRoute path="/Online-Shop/product/:id" exact component={Product} />
           <AuthenticatedRoute path="/Online-Shop/productUpdate/:id" exact component={ProductUpdate} />
           <AuthenticatedRoute path="/Online-Shop/cart" exact component={Cart} />

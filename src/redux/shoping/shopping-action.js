@@ -50,9 +50,18 @@ export const setAddress = (Address) => {
         payload: Address
     }
 }
+
 export const setActiveStep = (ActiveStep) => {
     return {
         type: actionTypes.SET_ACTIVESTEP,
         payload: ActiveStep
     }
-};
+}
+
+export const setOrders = (orders) => {
+    return {
+        type: actionTypes.SET_ORDERS,
+        payload: orders
+    }
+}
+

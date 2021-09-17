@@ -20,6 +20,7 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditRoundedIcon from '@material-ui/icons/EditRounded';
 import Typography from '@material-ui/core/Typography';
+import { Zoom } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     search: {
@@ -119,64 +120,66 @@ export default function ProductDashboard() {
     }
 
     return (
-        <div className="container" >
-            <div className={classes.search}>
-                <div className={classes.searchIcon}>
-                    <SearchIcon />
+        <Zoom in={true} style={{ transitionDelay: true ? '150ms' : '0ms' }} timeout={{ enter: 700 }}>
+            <div className="container" >
+                <div className={classes.search}>
+                    <div className={classes.searchIcon}>
+                        <SearchIcon />
+                    </div>
+                    <InputBase
+                        placeholder="Search product..."
+                        classes={{
+                            root: classes.inputRoot,
+                            input: classes.inputInput,
+                        }}
+                        inputProps={{ 'aria-label': 'search' }}
+                        onChange={e => setSearchResult(e.target.value)}
+                    />
                 </div>
-                <InputBase
-                    placeholder="Search product..."
-                    classes={{
-                        root: classes.inputRoot,
-                        input: classes.inputInput,
-                    }}
-                    inputProps={{ 'aria-label': 'search' }}
-                    onChange={e => setSearchResult(e.target.value)}
-                />
-            </div>
-            <br />
-            <Paper className={classes.paper}>
                 <br />
-                <Typography component="h2" variant="h4" color="primary" gutterBottom>
-                    Product List
-                </Typography>
-                <Table size="small">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell className={classes.tableHeader}>Product Name</TableCell>
-                            <TableCell className={classes.tableHeader}>Description</TableCell>
-                            <TableCell className={classes.tableHeader}>Image URL</TableCell>
-                            <TableCell className={classes.tableHeader}>Available Quantity</TableCell>
-                            <TableCell className={classes.tableHeader}>Price</TableCell>
-                            <TableCell className={classes.tableHeader}>Update</TableCell>
-                            <TableCell className={classes.tableHeader}>Remove</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {products.filter((value) => searchProduct(value)).map((row) => (
-                            <TableRow key={row.id}>
-                                <TableCell>{row.name}</TableCell>
-                                <TableCell>{row.description}</TableCell>
-                                <TableCell>{row.url}</TableCell>
-                                <TableCell align="center">{row.quantity}</TableCell>
-                                <TableCell align="right">{parseFloat(row.price).toFixed(2)}</TableCell>
-                                <TableCell><IconButton color="primary" onClick={() => updateProductClick(row.id)}><EditRoundedIcon /></IconButton></TableCell>
-                                <TableCell><IconButton aria-label="delete" color='secondary' onClick={() => deleteProductClick(row.id)}><DeleteIcon /></IconButton></TableCell>
+                <Paper className={classes.paper}>
+                    <br />
+                    <Typography component="h2" variant="h4" color="primary" gutterBottom>
+                        Product List
+                    </Typography>
+                    <Table size="small">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell className={classes.tableHeader}>Product Name</TableCell>
+                                <TableCell className={classes.tableHeader}>Description</TableCell>
+                                <TableCell className={classes.tableHeader}>Image URL</TableCell>
+                                <TableCell className={classes.tableHeader}>Available Quantity</TableCell>
+                                <TableCell className={classes.tableHeader}>Price</TableCell>
+                                <TableCell className={classes.tableHeader}>Update</TableCell>
+                                <TableCell className={classes.tableHeader}>Remove</TableCell>
                             </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </Paper>
-            <Slide direction="up" in={true} mountOnEnter unmountOnExit>
-                <Link to={`/Online-Shop/productUpdate/-1`} style={{ textDecoration: 'none' }}>
-                    <Fab color='secondary' aria-label="add" className={classes.absolute} title='Add Products' variant="extended">
-                        <AddIcon />
-                        Add New Product
-                    </Fab>
-                </Link>
-            </Slide>
-            <br />
-        </div>
+                        </TableHead>
+                        <TableBody>
+                            {products.filter((value) => searchProduct(value)).map((row) => (
+                                <TableRow key={row.id}>
+                                    <TableCell>{row.name}</TableCell>
+                                    <TableCell>{row.description}</TableCell>
+                                    <TableCell>{row.url}</TableCell>
+                                    <TableCell align="center">{row.quantity}</TableCell>
+                                    <TableCell align="right">{parseFloat(row.price).toFixed(2)}</TableCell>
+                                    <TableCell><IconButton color="primary" onClick={() => updateProductClick(row.id)}><EditRoundedIcon /></IconButton></TableCell>
+                                    <TableCell><IconButton aria-label="delete" color='secondary' onClick={() => deleteProductClick(row.id)}><DeleteIcon /></IconButton></TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </Paper>
+                <Slide direction="up" in={true} mountOnEnter unmountOnExit>
+                    <Link to={`/Online-Shop/productUpdate/-1`} style={{ textDecoration: 'none' }}>
+                        <Fab color='secondary' aria-label="add" className={classes.absolute} title='Add Products' variant="extended">
+                            <AddIcon />
+                            Add New Product
+                        </Fab>
+                    </Link>
+                </Slide>
+                <br />
+            </div>
+        </Zoom>
     );
 
 }

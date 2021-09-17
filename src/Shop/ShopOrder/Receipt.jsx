@@ -6,7 +6,7 @@ import SaveIcon from '@material-ui/icons/Save';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import StorefrontRoundedIcon from '@material-ui/icons/StorefrontRounded';
-import {removeAllFromCart} from '../../redux/shoping/shopping-action';
+import { removeAllFromCart } from '../../redux/shoping/shopping-action';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
 
@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     layout: {
         width: 'auto',
         marginLeft: theme.spacing(2),
-        marginRight: theme.spacing(2),        
+        marginRight: theme.spacing(2),
         [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
             width: 800,
             marginLeft: 'auto',
@@ -66,15 +66,15 @@ function Receipt({ removeAllFromCart }) {
                         content={() => componentRef.current}
                     />
                     <Button
-                            variant="contained"
-                            color='secondary'
-                            size="large"
-                            className={classes.button}
-                            startIcon={<StorefrontRoundedIcon />}
-                            onClick={ShopMore}
-                        >
-                            Shop More
-                        </Button>
+                        variant="contained"
+                        color='secondary'
+                        size="large"
+                        className={classes.button}
+                        startIcon={<StorefrontRoundedIcon />}
+                        onClick={ShopMore}
+                    >
+                        Shop More
+                    </Button>
                 </Paper >
             </main >
 

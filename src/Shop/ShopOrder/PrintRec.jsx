@@ -3,6 +3,7 @@ import Review from './Review'
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import { connect } from 'react-redux';
 
 const useStyles = theme => ({
     layout: {
@@ -48,10 +49,11 @@ export class PrintRec extends Component {
                                 <Typography variant="h5" gutterBottom>
                                     Thank you for your order.
                                 </Typography>
-                                {/* <Typography variant="subtitle1">
-                                    Your order number is #2001539. We have emailed your order confirmation, and will
-                                    send you an update when your order has shipped.
-                                </Typography> */}
+                                <Typography variant="subtitle1">
+                                    Your order number is {this.props.currentItem}. 
+                                    {/* We have emailed your order confirmation, and will send you an update when your order has shipped. */}
+                                </Typography>
+                                
                             </div>
                         </div >
                     </Paper >
@@ -61,4 +63,10 @@ export class PrintRec extends Component {
     }
 }
 
-export default withStyles(useStyles)(PrintRec)
+const mapStateProps = (state) => {
+    return {
+        currentItem: state.shop.currentItem
+    }
+}
+
+export default withStyles(useStyles)(connect(mapStateProps)(PrintRec))

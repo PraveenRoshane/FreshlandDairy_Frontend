@@ -8,7 +8,14 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import ShopImage from './asserts/online-store-image.jpg';
+import ShopImage from './asserts/online-store-image.svg';
+import EmployeeImage from './asserts/Employee-Management-Meaning-Importance-Tips-Tools---More.png';
+import FinancialImage from './asserts/financial-management.png';
+import StockImage from './asserts/stock-management-system.jpg';
+import InventoryImage from './asserts/inventory.png';
+import SalesImage from './asserts/sales.png';
+import SupplierImage from './asserts/supplier.jpg';
+import TransportImage from './asserts/transportation-management.png';
 
 export default function Home() {
     return (
@@ -29,10 +36,10 @@ export default function Home() {
                     <Grid item xs={12} md={6} lg={3}>
                         <Zoom in={true} style={{ transitionDelay: true ? '150ms' : '0ms' }} timeout={{ enter: 700 }}>
                             <Card elevation={10}>
-                                <CardHeader title="Online Store" />
+                                <CardHeader title="Store Management" />
                                 <Link to={`/Online-Shop`}>
                                     <CardMedia >
-                                        <img alt='' src= {ShopImage} width="300dp" height="250dp" />
+                                        <img alt='' src = {ShopImage} width="200dp" height="250dp" />
                                     </CardMedia>
                                 </Link>
                             </Card>
@@ -41,10 +48,10 @@ export default function Home() {
                     <Grid item xs={12} md={6} lg={3}>
                         <Zoom in={true} style={{ transitionDelay: true ? '150ms' : '0ms' }} timeout={{ enter: 700 }}>
                             <Card elevation={10}>
-                                <CardHeader title="Online Store" />
+                                <CardHeader title="Employee Management" />
                                 <Link to={`/login`}>
                                     <CardMedia >
-                                        <img alt='' src="https://wallpapershome.com/images/pages/pic_h/21486.jpg" width="300dp" height="250dp" />
+                                    <img alt='' src = {EmployeeImage} width="300dp" height="250dp" />
                                     </CardMedia>
                                 </Link>
                             </Card>
@@ -53,10 +60,10 @@ export default function Home() {
                     <Grid item xs={12} md={6} lg={3}>
                         <Zoom in={true} style={{ transitionDelay: true ? '150ms' : '0ms' }} timeout={{ enter: 700 }}>
                             <Card elevation={10}>
-                                <CardHeader title="Online Store" />
+                                <CardHeader title="Transport Management" />
                                 <Link to={`/login`}>
                                     <CardMedia >
-                                        <img alt='' src="https://wallpapershome.com/images/pages/pic_h/21486.jpg" width="300dp" height="250dp" />
+                                        <img alt='' src={TransportImage} width="300dp" height="250dp" />
                                     </CardMedia>
                                 </Link>
                             </Card>
@@ -65,10 +72,10 @@ export default function Home() {
                     <Grid item xs={12} md={6} lg={3}>
                         <Zoom in={true} style={{ transitionDelay: true ? '150ms' : '0ms' }} timeout={{ enter: 700 }}>
                             <Card elevation={10}>
-                                <CardHeader title="Online Store" />
+                                <CardHeader title="Stock Management" />
                                 <Link to={`/login`}>
                                     <CardMedia >
-                                        <img alt='' src="https://wallpapershome.com/images/pages/pic_h/21486.jpg" width="300dp" height="250dp" />
+                                        <img alt='' src={StockImage} width="300dp" height="250dp" />
                                     </CardMedia>
                                 </Link>
                             </Card>
@@ -77,10 +84,10 @@ export default function Home() {
                     <Grid item xs={12} md={6} lg={3}>
                         <Zoom in={true} style={{ transitionDelay: true ? '150ms' : '0ms' }} timeout={{ enter: 700 }}>
                             <Card elevation={10}>
-                                <CardHeader title="Online Store" />
+                                <CardHeader title="Supply Management" />
                                 <Link to={`/login`}>
                                     <CardMedia >
-                                        <img alt='' src="https://wallpapershome.com/images/pages/pic_h/21486.jpg" width="300dp" height="250dp" />
+                                        <img alt='' src={SupplierImage} width="300dp" height="250dp" />
                                     </CardMedia>
                                 </Link>
                             </Card>
@@ -89,10 +96,10 @@ export default function Home() {
                     <Grid item xs={12} md={6} lg={3}>
                         <Zoom in={true} style={{ transitionDelay: true ? '150ms' : '0ms' }} timeout={{ enter: 700 }}>
                             <Card elevation={10}>
-                                <CardHeader title="Online Store" />
+                                <CardHeader title="Inventory Management" />
                                 <Link to={`/login`}>
                                     <CardMedia >
-                                        <img alt='' src="https://wallpapershome.com/images/pages/pic_h/21486.jpg" width="300dp" height="250dp" />
+                                        <img alt='' src={InventoryImage} width="300dp" height="250dp" />
                                     </CardMedia>
                                 </Link>
                             </Card>
@@ -101,10 +108,10 @@ export default function Home() {
                     <Grid item xs={12} md={6} lg={3}>
                         <Zoom in={true} style={{ transitionDelay: true ? '150ms' : '0ms' }} timeout={{ enter: 700 }}>
                             <Card elevation={10}>
-                                <CardHeader title="Online Store" />
+                                <CardHeader title="Sales Management" />
                                 <Link to={`/login`}>
                                     <CardMedia >
-                                        <img alt='' src="https://wallpapershome.com/images/pages/pic_h/21486.jpg" width="300dp" height="250dp" />
+                                        <img alt='' src={SalesImage} width="300dp" height="250dp" />
                                     </CardMedia>
                                 </Link>
                             </Card>
@@ -113,10 +120,10 @@ export default function Home() {
                     <Grid item xs={12} md={6} lg={3}>
                         <Zoom in={true} style={{ transitionDelay: true ? '150ms' : '0ms' }} timeout={{ enter: 700 }}>
                             <Card elevation={10}>
-                                <CardHeader title="Online Store" />
+                                <CardHeader title="Financial Management" />
                                 <Link to={`/login`}>
                                     <CardMedia >
-                                        <img alt='' src="https://wallpapershome.com/images/pages/pic_h/21486.jpg" width="300dp" height="250dp" />
+                                        <img alt='' src={FinancialImage} width="300dp" height="250dp" />
                                     </CardMedia>
                                 </Link>
                             </Card>

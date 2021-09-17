@@ -27,7 +27,6 @@ class Login extends Component {
             .then(
                 (response) => {
                     Authentication.registerSuccessfulLoginForJwt(this.state.username, response.data.token)
-                    // this.props.history.push('/ProductList')
                     this.props.history.push('/Online-Shop/ProductList')                    
                 }
             ).catch(

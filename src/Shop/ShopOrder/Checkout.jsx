@@ -11,6 +11,9 @@ import Review from './Review';
 import ShopOrderService from '../../API/ShopOrderService';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import ShopOrderDetailsService from '../../API/ShopOrderDetailsService'
+import { loadCurruntItem } from '../../redux/shoping/shopping-action';
+import { bindActionCreators } from 'redux'
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -51,22 +54,27 @@ const useStyles = makeStyles((theme) => ({
 
 const steps = ['Shipping address', 'Review your order'];
 
-function Checkout({ address, cart}) {
+function Checkout({ address, cart, loadCurruntItem }) {
   const classes = useStyles();
   const history = useHistory();
   const [activeStep, setActiveStep] = useState(0);
 
   const handleNext = () => {
     let Amount = 0;
-    cart.forEach( item => { Amount += item.qty * item.price })
+    cart.forEach(item => { Amount += item.qty * item.price })
     var showDate = new Date();
 
     let order = { customerID: 1000, customerName: address.firstName, address: address.address, email: address.email, number: address.number, amount: Amount, date: showDate }
 
     ShopOrderService.addOrder(order)
-    .then(history.push("/Online-Shop/ShopOrder/Receipt"))
-
-
+      .then(response => {
+        {cart.map((product) => {
+          let orderDetails = { transactionID: response.data.transactionID, productID: product.id, name: product.name, quantity: product.qty, total: product.qty*product.price}
+          ShopOrderDetailsService.addOrderDetails(orderDetails)
+        })}
+        loadCurruntItem(response.data.transactionID)
+        history.push("/Online-Shop/ShopOrder/Receipt")
+      })
   };
 
   const handleBack = () => {
@@ -135,4 +143,8 @@ const mapStateProps = (state) => {
   }
 }
 
-export default connect(mapStateProps)(Checkout);
+const mapDispatchProps = (dispatch) => {
+  return bindActionCreators({ loadCurruntItem }, dispatch)
+}
+
+export default connect(mapStateProps, mapDispatchProps)(Checkout);

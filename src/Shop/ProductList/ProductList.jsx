@@ -1,8 +1,6 @@
-/* eslint-disable */
-
 import { useEffect } from 'react';
 import ProductCard from './ProductCard';
-import ProductDataService from '../../API/ProductDataService';
+import ProductDataService from '../../API/ProductDataService'
 import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux';
 import { setProducts } from '../../redux/shoping/shopping-action'
@@ -72,10 +70,10 @@ function ProductList({ products, setProducts }) {
 
     const loaddata = () => {
         ProductDataService.RerieveAllProducts()
-            .then(response => { setProducts(response.data) });
+            .then(response => setProducts(response.data));
     }
 
-    useEffect(loaddata, [products])
+    useEffect(loaddata, [])
 
     const searchProduct = (value) => {
 

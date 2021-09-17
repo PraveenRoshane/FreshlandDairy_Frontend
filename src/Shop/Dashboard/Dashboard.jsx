@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
+import { setOrders } from '../../redux/shoping/shopping-action'
+import ShopOrderService from '../../API/ShopOrderService';
+import { connect } from 'react-redux';
+import TotalOrders from './TotalOrders';
+import { Zoom } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,38 +36,72 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   fixedHeight: {
-    height: 320,
+    height: "510px",
+  },
+  fixedHeightCard: {
+    height: "auto",
   },
 }));
 
-export default function Dashboard() {
+function Dashboard({ setOrders }) {
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  const fixedHeightCard = clsx(classes.paper, classes.fixedHeightCard);
+
+  const loaddata = () => {
+    ShopOrderService.RerieveAllOrders()
+      .then(response => 
+        setOrders(response.data)
+      )
+  }
+
+  useEffect(loaddata, [])
 
   return (
     <div className={classes.root}>
-        <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3}>
-            {/* Chart */}
-            <Grid item xs={12} md={8} lg={9}>
+
+      <Container maxWidth="lg" className={classes.container}>
+        <Grid container spacing={3}>
+          {/* Chart */}
+          <Zoom in={true} style={{ transitionDelay: true ? '150ms' : '0ms' }} timeout={{ enter: 700 }}>
+            <Grid item xs={12} md={8} lg={9} >
               <Paper className={fixedHeightPaper}>
                 <Chart />
               </Paper>
             </Grid>
-            {/* Recent Deposits */}
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
+          </Zoom>
+          {/* Recent Deposits */}
+          <Grid item xs={12} md={4} lg={3}>
+            <Zoom in={true} style={{ transitionDelay: true ? '150ms' : '0ms' }} timeout={{ enter: 700 }}>
+              <Paper className={fixedHeightCard}>
                 <Deposits />
               </Paper>
-            </Grid>
-            {/* Recent Orders */}
+            </Zoom><br />
+            <Zoom in={true} style={{ transitionDelay: true ? '150ms' : '0ms' }} timeout={{ enter: 700 }}>
+              <Paper className={fixedHeightCard}>
+                <TotalOrders />
+              </Paper>
+            </Zoom>
+          </Grid>
+          {/* Recent Orders */}
+          <Zoom in={true} style={{ transitionDelay: true ? '150ms' : '0ms' }} timeout={{ enter: 700 }}>
             <Grid item xs={12}>
               <Paper className={classes.paper}>
                 <Orders />
               </Paper>
             </Grid>
-          </Grid>
-        </Container>
+          </Zoom>
+        </Grid>
+      </Container>
+
     </div>
   );
 }
+
+const mapDispatchProps = (dispach) => {
+  return {
+    setOrders: (data) => dispach(setOrders(data))
+  };
+}
+
+export default connect(null, mapDispatchProps)(Dashboard)
