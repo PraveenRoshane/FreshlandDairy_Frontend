@@ -22,7 +22,7 @@ class ShopMain extends Component {
           <AuthenticatedRoute path="/Online-Shop/productUpdate/:id" exact component={ProductUpdate} />
           <AuthenticatedRoute path="/Online-Shop/cart" exact component={Cart} />
           <AuthenticatedRoute path="/Online-Shop/ShopOrder/Shiping-Address" exact component={Checkout} />
-          <AuthenticatedRoute path="/Online-Shop/ShopOrder/Receipt" exact component={Receipt} />
+          <AuthenticatedRoute path="/Online-Shop/ShopOrder/Receipt/:id" exact component={Receipt} />
           <AuthenticatedRoute path="/Online-Shop/Dashboard" exact component={Dashboard} />
           <AuthenticatedRoute path="/Online-Shop/ProductManagement" exact component={ProductDashboard} />
         </Layout>

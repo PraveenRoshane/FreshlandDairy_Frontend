@@ -9,6 +9,7 @@ import StorefrontRoundedIcon from '@material-ui/icons/StorefrontRounded';
 import { removeAllFromCart } from '../../redux/shoping/shopping-action';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
+import { useParams } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -42,6 +43,7 @@ function Receipt({ removeAllFromCart }) {
     const classes = useStyles();
     const componentRef = useRef();
     const history = useHistory();
+    const params = useParams()
 
     const ShopMore = () => {
         removeAllFromCart()
@@ -52,7 +54,7 @@ function Receipt({ removeAllFromCart }) {
         <div>
             <main className={classes.layout}>
                 <Paper className={classes.paper}>
-                    <PrintRec ref={componentRef} />
+                    <PrintRec ref={componentRef} id={params.id}/>
                     <ReactToPrint
                         trigger={() => <Button
                             variant="contained"

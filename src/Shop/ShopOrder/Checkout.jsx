@@ -73,7 +73,7 @@ function Checkout({ address, cart, loadCurruntItem }) {
           ShopOrderDetailsService.addOrderDetails(orderDetails)
         })}
         loadCurruntItem(response.data.transactionID)
-        history.push("/Online-Shop/ShopOrder/Receipt")
+        history.push(`/Online-Shop/ShopOrder/Receipt/${response.data.transactionID}`)
       })
   };
 
