@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { useEffect } from 'react';
 import ProductCard from './ProductCard';
 import ProductDataService from '../../API/ProductDataService'

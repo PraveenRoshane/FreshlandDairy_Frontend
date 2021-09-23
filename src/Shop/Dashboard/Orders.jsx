@@ -16,7 +16,8 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Box from '@material-ui/core/Box';
 import Collapse from '@material-ui/core/Collapse';
 import Typography from '@material-ui/core/Typography';
-import { connect } from 'react-redux';
+import DeleteIcon from '@material-ui/icons/Delete';
+import ShopOrderService from '../../API/ShopOrderService';
 
 const useStyles = makeStyles((theme) => ({
   seeMore: {
@@ -47,6 +48,14 @@ function Row(props) {
 
   }
 
+  const deleteProductClick = (id, details) => {
+    ShopOrderService.deleteOrder(id)
+      .then(() => (details.map(item => {
+        console.log(item.shopOrderDetailsPK)
+        // ShopOrderDetailsService.deleteOrderDetails(item.shopOrderDetailsPK)      
+      })))
+  }
+
   useEffect(loaddata, [])
 
   return (
@@ -67,6 +76,7 @@ function Row(props) {
         <TableCell>{row.address}</TableCell>
         <TableCell>{row.number}</TableCell>
         <TableCell align="right">{parseFloat(row.amount).toFixed(2)}</TableCell>
+        <TableCell><IconButton aria-label="delete" color='secondary' onClick={() => deleteProductClick(row.transactionID, details.filter((value) => searchProduct(value, row.transactionID)))}><DeleteIcon /></IconButton></TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -101,8 +111,17 @@ function Row(props) {
   );
 }
 
-function Orders({ orders }) {
+function Orders() {
   const classes = useStyles();
+  const [orders, setOrders] = useState([]);
+
+  const loaddata = () => {
+    ShopOrderService.RerieveAllOrders()
+      .then(response => setOrders(response.data)
+      )
+  }
+
+  useEffect(loaddata, [orders])
 
   return (
     <React.Fragment>
@@ -131,10 +150,4 @@ function Orders({ orders }) {
   );
 }
 
-const mapStateProps = (state) => {
-  return {
-    orders: state.shop.orders
-  }
-}
-
-export default connect(mapStateProps)(Orders)
+export default Orders

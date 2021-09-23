@@ -79,7 +79,7 @@ function Chart({ orders }) {
 
   const chart = () => {
     let item1 = 0;
-    for (var i = 1; i < 14; i++) {
+    for (let i = 1; i < 14; i++) {
       orders.filter((value) => searchYear(value)).filter((value) => searchMonth(value, i)).forEach(item => {
         item1 += item.amount;
       })
@@ -113,9 +113,9 @@ function Chart({ orders }) {
     }
   }
 
-  useEffect(() => {
-    chart()
-  }, [orders]);
+  useEffect(
+    chart
+  , [orders]);
   
   return (
     <React.Fragment>
@@ -132,46 +132,3 @@ const mapStateProps = (state) => {
 }
 
 export default connect(mapStateProps)(Chart)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{/* 
-  <ResponsiveContainer>
-  <LineChart
-  data={data}
-  margin={{
-    top: 16,
-    right: 16,
-    bottom: 0,
-    left: 24,
-  }}
->
-  <XAxis dataKey="time" stroke={theme.palette.text.secondary} />
-  <YAxis stroke={theme.palette.text.secondary}>
-    <Label
-      angle={270}
-      position="left"
-      style={{ textAnchor: 'middle', fill: theme.palette.text.primary, fontWeight: 600 }}
-    >
-      Sales (Rs)
-    </Label>
-  </YAxis>
-  <Line type="monotone" dataKey="amount" stroke={theme.palette.primary.main} dot={false} />
-</LineChart>
-</ResponsiveContainer> */}

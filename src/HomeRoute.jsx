@@ -14,7 +14,7 @@ function HomeRoute() {
                 <>
                     <Switch>
                         <Route path="/" exact component={Home} />
-                        <Route path="/Online-Shop/login" exact component={Login} />                        
+                        <Route path="/Online-Shop/login" exact component={Login} />
                         <ShopMain />
                         <AuthenticatedRoute path="/logout" exact component={LogoutComponent} />
                         <Route component={ErrorMessage} />

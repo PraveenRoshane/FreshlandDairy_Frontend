@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import { BrowserRouter as Route } from 'react-router-dom';
 import AuthenticatedRoute from '../AuthenticatedRoute';
 import ProductList from './ProductList/ProductList';
 import Product from './ProductList/Product';

@@ -1,4 +1,9 @@
 import { Component } from 'react';
+import Facebook from '@material-ui/icons/Facebook'
+import Twitter from '@material-ui/icons/Twitter'
+import Instagram from '@material-ui/icons/Instagram'
+import WhatsApp from '@material-ui/icons/WhatsApp'
+import Email from '@material-ui/icons/EmailRounded'
 
 class Footer extends Component {
     render() {
@@ -47,11 +52,11 @@ class Footer extends Component {
                                 <h6 className="text-uppercase font-weight-bold mb-4">Registered Office Address</h6>
                                 <p className="text-muted mb-4">Here , write the complete address of the Registered office address along with telephone number.</p>
                                 <ul className="list-inline mt-4">
-                                    <li className="list-inline-item"><i className="fab fa-2x fa-twitter"></i></li>
-                                    <li className="list-inline-item"><i className="fab fa-2x fa-facebook-f"></i></li>
-                                    <li className="list-inline-item"><i className="fab fa-2x fa-instagram"></i></li>
-                                    <li className="list-inline-item"><i className="fab fa-2x fa-youtube"></i></li>
-                                    <li className="list-inline-item"><i className="fab fa-2x fa-google"></i></li>
+                                    <li className="list-inline-item"><Facebook/></li>
+                                    <li className="list-inline-item"><Twitter/></li>
+                                    <li className="list-inline-item"><Instagram/></li>
+                                    <li className="list-inline-item"><WhatsApp/></li>
+                                    <li className="list-inline-item"><Email/></li>
                                 </ul>
                             </div>
                         </div>

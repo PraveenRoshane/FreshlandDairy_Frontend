@@ -11,8 +11,8 @@ export class ShopOrderDetailsService{
         return axios.get(`${JPA_API_URL }/shop-order/orderdetails/${id}`);
     }
 
-    deleteOrderDetails(id){
-        return axios.delete(`${JPA_API_URL}/shop-order/orderdetails/${id}`);
+    deleteOrderDetails(Order){
+        return axios.delete(`${JPA_API_URL}/shop-order/orderdetails/delete`, Order);
     }
 
     updateOrderDetails(id, Order){

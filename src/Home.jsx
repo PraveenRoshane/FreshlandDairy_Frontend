@@ -19,7 +19,7 @@ import TransportImage from './asserts/transportation-management.png';
 
 export default function Home() {
     return (
-        <>
+        <React.StrictMode>
             <AppBar position="static">
                 <Toolbar>
                     <IconButton edge="start" color="inherit" aria-label="menu">
@@ -133,6 +133,6 @@ export default function Home() {
             </div>
             <br />
             <Footer />
-        </>
+        </React.StrictMode>
     )
 }

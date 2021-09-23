@@ -68,10 +68,10 @@ function Checkout({ address, cart, loadCurruntItem }) {
 
     ShopOrderService.addOrder(order)
       .then(response => {
-        {cart.map((product) => {
-          let orderDetails = { transactionID: response.data.transactionID, productID: product.id, name: product.name, quantity: product.qty, total: product.qty*product.price}
+        cart.forEach( product => {
+          let orderDetails = { transactionID: response.data.transactionID, productID: product.id, name: product.name, quantity: product.qty, total: product.qty * product.price }
           ShopOrderDetailsService.addOrderDetails(orderDetails)
-        })}
+        })
         loadCurruntItem(response.data.transactionID)
         history.push(`/Online-Shop/ShopOrder/Receipt/${response.data.transactionID}`)
       })
