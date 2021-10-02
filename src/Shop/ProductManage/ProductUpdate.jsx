@@ -65,7 +65,7 @@ class ProductUpdate extends Component {
     validate(values) {
         let errors = {}
 
-        if (!values.name || !values.price || !values.description || !values.url) {
+        if (!values.name || !values.price || !values.description || !values.url || !values.qty) {
             errors.name = 'All Fields must be filled'
         } else { }
 
@@ -78,14 +78,16 @@ class ProductUpdate extends Component {
 
         if (this.state.id !== -1) {
             ProductDataService.updateProduct(this.state.id, product)
-                .then(() => this.props.history.push('/Online-Shop/ProductManagement'))
+                .then(() => {
+                    this.props.history.push('/Online-Shop/ProductManagement')
+                })
         }
         else {
 
             ProductDataService.addProduct(product)
                 .then(() => this.props.history.push('/Online-Shop/ProductManagement'))
 
-                
+
         }
     }
 
@@ -104,7 +106,7 @@ class ProductUpdate extends Component {
                         <h1>{this.state.name}</h1>
                         <div className="container">
                             <br />
-                            <Formik initialValues={{ name, price, description, url, qty }} onSubmit={this.onSubmit} validate={this.validate} enableReinitialize={true} validateOnChange={true} >
+                            <Formik initialValues={{ name, price, description, url, qty }} onSubmit={this.onSubmit} validate={this.validate} enableReinitialize={true} validateOnChange={false} validateOnBlur={false}>
                                 {
                                     (props) => (
                                         <Form>

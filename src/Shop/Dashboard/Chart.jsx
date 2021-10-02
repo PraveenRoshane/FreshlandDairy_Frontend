@@ -27,7 +27,7 @@ function Chart({ orders }) {
   }
 
   const searchMonth = (value, month) => {
-    if (Moment(value.date).format('MM').includes(month))
+    if (Moment(value.date).format('MM') == month )
       return value
   }
 
@@ -67,13 +67,13 @@ function Chart({ orders }) {
         setData(data.nov = value)
         break
       case 12:
-        setData(data.new = value)
+        setData(data.dec = value)
         break
       case 13:
         setData({ ...data, dec: value })
         break
       default:
-        return null
+        break
     }
   }
 

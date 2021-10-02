@@ -76,7 +76,7 @@ function Row(props) {
         <TableCell>{row.address}</TableCell>
         <TableCell>{row.number}</TableCell>
         <TableCell align="right">{parseFloat(row.amount).toFixed(2)}</TableCell>
-        <TableCell><IconButton aria-label="delete" color='secondary' onClick={() => deleteProductClick(row.transactionID, details.filter((value) => searchProduct(value, row.transactionID)))}><DeleteIcon /></IconButton></TableCell>
+        <TableCell align="center"><IconButton aria-label="delete" color='secondary' onClick={() => deleteProductClick(row.transactionID, details.filter((value) => searchProduct(value, row.transactionID)))}><DeleteIcon /></IconButton></TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -138,6 +138,7 @@ function Orders() {
             <TableCell className={classes.tableHeader}>Ship To</TableCell>
             <TableCell className={classes.tableHeader}>Contact Number</TableCell>
             <TableCell className={classes.tableHeader} align="right">Sale Amount</TableCell>
+            <TableCell className={classes.tableHeader} align="right">Remove</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
