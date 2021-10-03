@@ -13,8 +13,8 @@ function HomeRoute() {
             <Router>
                 <>
                     <Switch>
-                        <Route path="/" exact component={Home} />
-                        <Route path="/Online-Shop/login" exact component={Login} />
+                        <Route path="/" exact component={Login} />
+                        <Route path="/Home" exact component={Home} />
                         <ShopMain />
                         <AuthenticatedRoute path="/logout" exact component={LogoutComponent} />
                         <Route component={ErrorMessage} />
