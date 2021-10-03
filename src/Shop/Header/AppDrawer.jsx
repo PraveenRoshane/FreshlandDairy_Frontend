@@ -123,7 +123,7 @@ function AppDrawer({ cart }) {
         text: 'Home',
         icon: <HomeRoundedIcon />,
         status: true,
-        onClick: () => history.push('/')
+        onClick: () => history.push('/Home')
     }, {
         text: 'Store',
         icon: <StorefrontRoundedIcon />,
