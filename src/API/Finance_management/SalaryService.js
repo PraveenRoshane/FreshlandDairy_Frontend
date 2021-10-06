@@ -20,6 +20,13 @@ class SalaryServices{
     createSalary(Salary){
         return axios.post('http://localhost:8080/users/salary', Salary);
     }
+
+    getSum(month, year){
+        return axios.get(`http://localhost:8080/users/salary/salarysum/${month}/${year}`)
+    }
+    getsendtoAccounts(month, year){
+        return axios.get(`http://localhost:8080/users/accounts/makesalaryaccount/${month}/${year}`)
+    }
     
     
 }

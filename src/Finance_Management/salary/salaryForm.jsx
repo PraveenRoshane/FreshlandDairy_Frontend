@@ -101,9 +101,9 @@ class Salaryform extends Component{
                 basic : values.basic,
                 ot : values.ot,
                 bonus : values.bonus,
-                etf : values.etf,
-                epf : values.epf,
-                total : values.total})
+                etf : 1,
+                epf : 1,
+                total : 1})
             .then(() => this.props.history.push('/FinanceManagement/salary/view'))
         }else{
             SalaryService.updateSalary(this.props.match.params.id , {
@@ -115,9 +115,9 @@ class Salaryform extends Component{
                 basic : values.basic,
                 ot : values.ot,
                 bonus : values.bonus,
-                etf : values.etf,
-                epf : values.epf,
-                total : values.total})
+                etf : 1,
+                epf : 1,
+                total : 1})
         .then(() => this.props.history.push('/FinanceManagement/salary/view'))
          }
     }
@@ -183,7 +183,7 @@ class Salaryform extends Component{
                                     <label>Bonus</label>
                                     <Field className ="form-control" type ="text" name ="bonus"/>
                                 </fieldset>
-
+                                {/*
                                 <ErrorMessage name = "etf" component="div" className = "alert alert-warning"></ErrorMessage>
                                 <fieldset className="form-group">
                                     <label>ETF</label>
@@ -200,7 +200,7 @@ class Salaryform extends Component{
                                 <fieldset className = "form-group">
                                     <label> Total</label>
                                     <Field className ="form-control" type ="text" name ="total"/>
-                                </fieldset>
+                                </fieldset>*/}
 
 
                                 <button className ="btn btn-success" type ="submit">Save</button>
