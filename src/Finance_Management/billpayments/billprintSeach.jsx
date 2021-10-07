@@ -1,14 +1,14 @@
 import React, {Component} from 'react'
 import { Formik , Form , Field, ErrorMessage} from 'formik';
-import SalaryService from '../../API/Finance_management/SalaryService';
+import moment from 'moment';
+import BillDataService from '../../API/Finance_management/BillServise.js'
 
-class SalarySearch extends Component {
+class BillReportSearch extends Component {
     
     constructor (props){
         super(props)
         this.state = {
-            month : 'Enter Month',
-            year : 'Enter Year'
+            month : moment(new Date()).format('YYYY-MM'),
         }
         this.onSubmit = this.onSubmit.bind(this)
     }
@@ -17,21 +17,21 @@ class SalarySearch extends Component {
     
     onSubmit(values){
 
-        this.props.history.push(`/FinanceManagement/salary/report/${values.month}/${values.year}`)
-        SalaryService.getsendtoAccounts(values.month,values.year)
+        this.props.history.push(`/FinanceManagement/bills/report/${values.month}`)
+        BillDataService.createBillAccount(values.month)
 
     }
     
         
     
     render(){
-        let {month, year} =this.state
+        let {month} =this.state
         return(
             <>
             <h1>Genarate Salary Report</h1>
             <div className="container">
             <Formik
-                initialValues ={{month, year}}
+                initialValues ={{month}}
                 onSubmit = {this.onSubmit}
                 enableReinitialize = {true}
             >
@@ -41,11 +41,9 @@ class SalarySearch extends Component {
                         
                         <fieldset className = "form-group">
                         
-                            <label>Month</label>
-                            <Field className="form-control" type="text" name="month" placeholder="Month"/>
+                            <label>Select Month</label>
+                            <Field className="form-control" type="month" name="month" />
 
-                            <label>Year </label>
-                            <Field className="form-control" type="text" name="year" />
                         </fieldset>
                         
                         <button className ="btn btn-success" type ="submit">Search</button> 
@@ -62,4 +60,4 @@ class SalarySearch extends Component {
     }
 }
 
-export default SalarySearch;
+export default BillReportSearch;

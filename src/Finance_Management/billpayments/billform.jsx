@@ -65,6 +65,8 @@ class billform extends Component{
                 discription : values.description,
                 amount : values.amount,
                 billDate : values.billDate,
+                billmonth: null,
+                billyear: null,
                 billType : values.billType})
             .then(() => this.props.history.push('/FinanceManagement/bills/view'))
         }else{
@@ -73,6 +75,8 @@ class billform extends Component{
                 discription : values.description,
                 amount : values.amount,
                 billDate : values.billDate,
+                billmonth: null,
+                billyear: null,
                 billType : values.billType})
         .then(() => this.props.history.push('/FinanceManagement/bills/view'))
          }

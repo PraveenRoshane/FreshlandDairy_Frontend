@@ -21,13 +21,19 @@ class BillDataService{
         return axios.post('http://localhost:8080/users/bills', bill);
     }
     
-    searchBill(searchitem){
-        return axios.get(`http://localhost:8080/users/bills/search/${searchitem}`);
+    searchBill(searchitems){
+        return axios.get(`http://localhost:8080/users/bills/search/${searchitems}`);
+    }
+    searchBillCount(searchitems){
+        return axios.get(`http://localhost:8080/users/bills/search/count/${searchitems}`);
+    }
+    searchBillsum(searchitems){
+        return axios.get(`http://localhost:8080/users/bills/search/sum/${searchitems}`);
     }
 
-    //searchBill(searchitem, DateFrom, DateTo){
-    //    return axios.get(`http://localhost:8080/users/bills/search/${searchitem}/${DateFrom}/${DateTo}`);
-    //}
+    createBillAccount(month){
+        return axios.get(`http://localhost:8080/users/accounts/makeBillaccount/${month}`);
+    }
     
 }
 export default new BillDataService();

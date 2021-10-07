@@ -4,8 +4,10 @@ import './lahirucommoncss.css';
 import billform from '../billpayments/billform';
 import FmBillView from '../billpayments/fmbillviewfunc';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Example from '../testcomponents/examlple';
+//import Example from '../testcomponents/examlple';
 import FinancePic from './finacepic';
+import FinancePrinter from './financeprinter';
+import BillReportSearch from '../billpayments/billprintSeach';
 
 class FinanceMngSidebar extends Component{
         //constructor(props){
@@ -30,10 +32,13 @@ class FinanceMngSidebar extends Component{
                 </Switch>
                 {/*<Route path = "/FinanceManagement/bills/" exact component = {FinancePic}/>*/}
                 <div className="fminfo">
+                
                 <Switch>
-                <Route path = "/FinanceManagement/bills/report" exact component = {Example}/>
+                <Route path = "/FinanceManagement/bills/report/:month"  component = {FinancePrinter}/>
+                <Route path = "/FinanceManagement/bills/report" component = {BillReportSearch}/>
+                
                 <Route path = "/FinanceManagement/bills/view" exact component = {FmBillView}/>
-                <Route path = "/FinanceManagement/bills/:id" component = {billform}/>
+                <Route path = "/FinanceManagement/bills/:id" exact component = {billform}/>
                 </Switch>
                 
                 
