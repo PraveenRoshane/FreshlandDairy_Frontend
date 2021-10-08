@@ -113,7 +113,7 @@ export default function Home() {
                         <Zoom in={true} style={{ transitionDelay: true ? '150ms' : '0ms' }} timeout={{ enter: 700 }}>
                             <Card elevation={10}>
                                 <CardHeader title="Sales Management" />
-                                <Link to={`/login`}>
+                                <Link to={`/Sales-management`}>
                                     <CardMedia >
                                         <img alt='' src={SalesImage} width="300dp" height="250dp" />
                                     </CardMedia>

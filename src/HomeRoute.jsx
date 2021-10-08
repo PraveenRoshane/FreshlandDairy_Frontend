@@ -7,6 +7,8 @@ import ShopMain from './Shop/ShopMain';
 import Home from './Home';
 import Login from './Login/Login';
 import FinanceManagementRoute from './Finance_Management/commoncomponents/financemng_route';
+import SaleseManagementHome from './Sales_Management/SalesManagementHome';
+
 
 function HomeRoute() {
     return (
@@ -16,11 +18,11 @@ function HomeRoute() {
                     <Switch>
                         <Route path="/" exact component={Login} />
                         <Route path="/Home" exact component={Home} />
-                        <Route path="/FinanceManagement" component={FinanceManagementRoute} />
-
+                        <Route path="/FinanceManagement"  component={FinanceManagementRoute} />
+                        <Route path="/Sales-management"  component={SaleseManagementHome} />
                         <ShopMain />
                         <FinanceManagementRoute />
-
+                        <SaleseManagementHome/>
                         <AuthenticatedRoute path="/logout" exact component={LogoutComponent} />
                         <Route component={ErrorMessage} />
                     </Switch>
