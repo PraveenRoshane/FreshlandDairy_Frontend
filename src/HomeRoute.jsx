@@ -16,9 +16,11 @@ function HomeRoute() {
                     <Switch>
                         <Route path="/" exact component={Login} />
                         <Route path="/Home" exact component={Home} />
-                        <Route path="/FinanceManagement"  component={FinanceManagementRoute} />
+                        <Route path="/FinanceManagement" component={FinanceManagementRoute} />
+
                         <ShopMain />
                         <FinanceManagementRoute />
+
                         <AuthenticatedRoute path="/logout" exact component={LogoutComponent} />
                         <Route component={ErrorMessage} />
                     </Switch>
