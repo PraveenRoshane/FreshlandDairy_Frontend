@@ -8,7 +8,8 @@ import MyFooter from './footer';
 import FinanceMngSidebar from './finance_mng_sidebar';
 import accountsSidebar from '../accounts/accountssidebar';
 import SalarySidebar from '../salary/salarysidebar';
-import Home from "../../Home"
+//import Home from "../../Home"
+import FinanceManagementHome from './FinanceMnagementHome';
 
 class FinanceManagementRoute extends Component {
   render() {
@@ -16,9 +17,11 @@ class FinanceManagementRoute extends Component {
       <div className="FinanceManagementRoute">
 
             <MyHeader/>
+            
             <Route path = "/FinanceManagement/bills" component = {FinanceMngSidebar}/>
             <Route path = "/FinanceManagement/accounts" component = {accountsSidebar}/>
-            <Route path = "/FinanceManagement/salary" component = {SalarySidebar}/>            
+            <Route path = "/FinanceManagement/salary" component = {SalarySidebar}/>
+            <Route path = "/FinanceManagement" exact component = {FinanceManagementHome}/>            
             <MyFooter/>
             
       </div>

@@ -11,7 +11,8 @@ class MyHeader extends Component{
                 <span className="text-muted">  Freshland Milk</span>
                 
                 <ul className = "navbar-nav">
-                    <li className ="nav-link"><Link className="nav-link" to="/Home">home</Link></li>
+                    <li className ="nav-link"><Link className="nav-link" to="/Home">Home</Link></li>
+                    <li className ="nav-link"><Link className="nav-link" to="/FinanceManagement">Finance Management Home</Link></li>
                     <li className ="nav-link"><Link className="nav-link" to="/FinanceManagement/bills">Bill Function</Link></li>
                     <li className ="nav-link"><Link className="nav-link" to="/FinanceManagement/salary">Salary Function</Link></li>
                     <li className ="nav-link"><Link className="nav-link" to="/FinanceManagement/accounts">Accounts</Link></li>
