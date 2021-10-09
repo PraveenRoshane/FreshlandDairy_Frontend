@@ -65,9 +65,20 @@ class ProductUpdate extends Component {
     validate(values) {
         let errors = {}
 
-        if (!values.name || !values.price || !values.description || !values.url || !values.qty) {
-            errors.name = 'All Fields must be filled'
-        } else { }
+        if (!values.name) {
+            errors.name = 'Name Fields must be filled'
+        } else if (!values.price) {
+            errors.price = 'Price Fields must be filled'
+        } else if (!values.price.match(/^[-+]?[0-9]+\.[0-9]+$/)) {
+            errors.price = 'please enter an valid price'
+        } else if (!values.description) {
+            errors.description = 'Description Fields must be filled'
+        } else if (!values.url) {
+            errors.url = 'Image URL Fields must be filled'
+        } else if (!values.qty) {
+            errors.qty = 'Quantity Fields must be filled'
+        }
+        else { }
 
         return errors
     }
@@ -110,32 +121,37 @@ class ProductUpdate extends Component {
                                 {
                                     (props) => (
                                         <Form>
-                                            <ErrorMessage name="name" component="div" className="alert alert-warning" />
+
                                             <fieldset className="form-group">
                                                 <label className="label">Name</label>
                                                 <Field className="textarea" type="text" name="name" />
                                             </fieldset>
                                             <br />
+                                            <ErrorMessage name="name" component="div" className="alert alert-warning" />
                                             <fieldset className="form-group">
                                                 <label className="label">Price Rs.</label>
                                                 <Field className="textarea" type="text" name="price" />
                                             </fieldset>
                                             <br />
+                                            <ErrorMessage name="price" component="div" className="alert alert-warning" />
                                             <fieldset className="form-group">
                                                 <label className="label">Description</label>
                                                 <Field className="textarea" type="text" name="description" />
                                             </fieldset>
                                             <br />
+                                            <ErrorMessage name="description" component="div" className="alert alert-warning" />
                                             <fieldset className="form-group">
                                                 <label className="label">Image URL</label>
                                                 <Field className="textarea" type="text" name="url" />
                                             </fieldset>
                                             <br />
+                                            <ErrorMessage name="url" component="div" className="alert alert-warning" />
                                             <fieldset className="form-group">
                                                 <label className="label">Quantity</label>
                                                 <Field className="textarea" type="number" name="qty" />
                                             </fieldset>
                                             <br />
+                                            <ErrorMessage name="qty" component="div" className="alert alert-warning" />
                                             <button className="btn btn-success" type="submit">Save</button>
                                         </Form>
                                     )
