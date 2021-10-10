@@ -5,9 +5,9 @@ import '../App.css'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import RawmaterialView from './rawmaterialView';
 import RawMaterialForm from './rawMaterialForm';
-import RawMaterialPreinter from './rawMaterialPrinter';
+//import RawMaterialPreinter from './rawMaterialPrinter';
 import RawmaterialReportSearch from './rawMaterialSearch';
-//import RawmeterialReportView from './rawMaterialPrintView';
+import RawmeterialReportView from './rawMaterialPrintView';
 
 class RawMaterialSidebar extends Component{
   render(){
@@ -30,7 +30,7 @@ class RawMaterialSidebar extends Component{
             <div className="fmmain_content">
             <div className="fminfo">
             <Switch>
-                <Route path = "/rawmaterialManagement/report/:month" exact component = {RawMaterialPreinter}/>
+                <Route path = "/rawmaterialManagement/report/:month" exact component = {RawmeterialReportView}/>
                 <Route path = "/rawmaterialManagement/report" exact component = {RawmaterialReportSearch}/>
 
                 <Route path = "/rawmaterialManagement" exact component = {RawmaterialView}/>

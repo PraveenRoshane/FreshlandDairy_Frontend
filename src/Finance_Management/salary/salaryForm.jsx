@@ -23,6 +23,8 @@ class Salaryform extends Component{
         }
         this.onSubmit = this.onSubmit.bind(this)
         this.validate = this.validate.bind(this)
+        this.handleDropdownChange = this.handleDropdownChange.bind(this)
+        this.handleDropdownChangeyear = this.handleDropdownChangeyear.bind(this)
     }
 
     
@@ -89,13 +91,19 @@ class Salaryform extends Component{
             }))
     }
 
+    handleDropdownChange(e) {
+        this.setState({ month: e.target.value });
+      }
+      handleDropdownChangeyear(e) {
+        this.setState({ year: e.target.value });
+      }
 
     onSubmit(values){
         if (this.props.match.params.id == -1){
             SalaryService.createSalary({
                 id: this.state.id,
-                month : values.month,
-                year : values.year,
+                month : this.state.month,
+                year : this.state.year,
                 eid : values.eid,
                 job : values.job,
                 basic : values.basic,
@@ -108,8 +116,8 @@ class Salaryform extends Component{
         }else{
             SalaryService.updateSalary(this.props.match.params.id , {
                 id: this.state.id,
-                month : values.month,
-                year : values.year,
+                month : this.state.month,
+                year : this.state.year,
                 eid : values.eid,
                 job : values.job,
                 basic : values.basic,
@@ -140,6 +148,44 @@ class Salaryform extends Component{
                     {
                         (props)=> (
                             <Form>
+
+
+                            <fieldset className="form-group">
+                             
+                            <label>Month</label>
+                            {/* <Field className="form-control" type="text" name="month" /> */}
+                            <select id="dropdown" onChange={this.handleDropdownChange} className="form-control">
+                                <option value="">select month</option>
+                                <option value="january">January</option>
+                                <option value="february">February</option>
+                                <option value="march">March</option>
+                                <option value="april">April</option>
+                                <option value="may">May</option>
+                                <option value="june">June</option>
+                                <option value="july">July</option>
+                                <option value="august">August</option>
+                                <option value="september">September</option>
+                                <option value="october">October</option>
+                                <option value="november">November</option>
+                                <option value="december">December</option>
+                                </select>
+                            <label>Year </label>
+                            {/* <Field className="form-control" type="text" name="year" /> */}
+                            <select id="dropdown" onChange={this.handleDropdownChangeyear} className="form-control">
+                                <option value="">select year</option>
+                                <option value="2020">2020</option>
+                                <option value="2021">2021</option>
+                                <option value="2022">2022</option>
+                                <option value="2023">2023</option>
+                                <option value="2024">2024</option>
+                                <option value="2025">2025</option>
+                                </select>
+
+
+                                </fieldset>
+
+
+
                                 <ErrorMessage name = "eid" component="div" className = "alert alert-warning"></ErrorMessage>
                                 <fieldset className = "form-group">
                                     <label>Employee ID</label>
@@ -152,7 +198,10 @@ class Salaryform extends Component{
                                     <Field className ="form-control" type ="text" name ="job"/>
                                 </fieldset>
 
-                                <ErrorMessage name = "month" component="div" className = "alert alert-warning"></ErrorMessage>
+
+
+
+                                {/* <ErrorMessage name = "month" component="div" className = "alert alert-warning"></ErrorMessage>
                                 <fieldset className="form-group">
                                     <label>Month</label>
                                     <Field className="form-control" type="text" name="month" />
@@ -162,7 +211,7 @@ class Salaryform extends Component{
                                 <fieldset className = "form-group">
                                     <label> Year</label>
                                     <Field className ="form-control" type ="text" name ="year"/>
-                                </fieldset>
+                                </fieldset> */}
 
                                 <ErrorMessage name = "basic" component="div" className = "alert alert-warning"></ErrorMessage>
                                 <fieldset className = "form-group">
