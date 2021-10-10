@@ -16,8 +16,12 @@ import InventoryImage from './asserts/inventory.png';
 import SalesImage from './asserts/sales.png';
 import SupplierImage from './asserts/supplier.jpg';
 import TransportImage from './asserts/transportation-management.png';
+import Authentication from './API/Authentication.js'
 
 export default function Home() {
+
+    let username = Authentication.getUserLoggedin()
+
     return (
         <React.StrictMode>
             <AppBar position="static">
@@ -49,7 +53,7 @@ export default function Home() {
                         <Zoom in={true} style={{ transitionDelay: true ? '150ms' : '0ms' }} timeout={{ enter: 700 }}>
                             <Card elevation={10}>
                                 <CardHeader title="Employee Management" />
-                                <Link to={`/login`}>
+                                <Link to={`/welcome`}>
                                     <CardMedia >
                                     <img alt='' src = {EmployeeImage} width="300dp" height="250dp" />
                                     </CardMedia>
@@ -73,7 +77,7 @@ export default function Home() {
                         <Zoom in={true} style={{ transitionDelay: true ? '150ms' : '0ms' }} timeout={{ enter: 700 }}>
                             <Card elevation={10}>
                                 <CardHeader title="Stock Management" />
-                                <Link to={`/login`}>
+                                <Link to={`/StockManagement`}>
                                     <CardMedia >
                                         <img alt='' src={StockImage} width="300dp" height="250dp" />
                                     </CardMedia>
@@ -97,7 +101,7 @@ export default function Home() {
                         <Zoom in={true} style={{ transitionDelay: true ? '150ms' : '0ms' }} timeout={{ enter: 700 }}>
                             <Card elevation={10}>
                                 <CardHeader title="Inventory Management" />
-                                <Link to={`/login`}>
+                                <Link to={`/rawmaterialManagement`}>
                                     <CardMedia >
                                         <img alt='' src={InventoryImage} width="300dp" height="250dp" />
                                     </CardMedia>
