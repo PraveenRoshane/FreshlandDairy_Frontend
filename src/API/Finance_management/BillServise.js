@@ -1,38 +1,39 @@
 import axios from "axios";
+import {JPA_API_URL } from '../../Constants';
 
 class BillDataService{
     retriveAllBills(){
-        return axios.get('http://localhost:8080/users/bills');
+        return axios.get(`${JPA_API_URL}/users/bills`);
     }
 
     deleteBill(id){
-        return axios.delete(`http://localhost:8080/users/bills/${id}`);
+        return axios.delete(`${JPA_API_URL}/users/bills/${id}`);
     }
 
     retriveBill(id){
-        return axios.get(`http://localhost:8080/users/bills/${id}`);
+        return axios.get(`${JPA_API_URL}/users/bills/${id}`);
     }
 
     updateBill(id, bill){
-        return axios.put(`http://localhost:8080/users/bills/${id}`, bill);
+        return axios.put(`${JPA_API_URL}/users/bills/${id}`, bill);
     }
 
     createBill(bill){
-        return axios.post('http://localhost:8080/users/bills', bill);
+        return axios.post(`${JPA_API_URL}/users/bills`, bill);
     }
     
     searchBill(searchitems){
-        return axios.get(`http://localhost:8080/users/bills/search/${searchitems}`);
+        return axios.get(`${JPA_API_URL}/users/bills/search/${searchitems}`);
     }
     searchBillCount(searchitems){
-        return axios.get(`http://localhost:8080/users/bills/search/count/${searchitems}`);
+        return axios.get(`${JPA_API_URL}/users/bills/search/count/${searchitems}`);
     }
     searchBillsum(searchitems){
-        return axios.get(`http://localhost:8080/users/bills/search/sum/${searchitems}`);
+        return axios.get(`${JPA_API_URL}/users/bills/search/sum/${searchitems}`);
     }
 
     createBillAccount(month){
-        return axios.get(`http://localhost:8080/users/accounts/makeBillaccount/${month}`);
+        return axios.get(`${JPA_API_URL}/users/accounts/makeBillaccount/${month}`);
     }
     
 }

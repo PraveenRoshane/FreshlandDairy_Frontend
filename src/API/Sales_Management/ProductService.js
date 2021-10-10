@@ -2,7 +2,7 @@
 import axios from "axios"
 //import {API_URL ,JPA_API_URL} from '../../Constants'
 
-const JPA_API_URL = 'http://localhost:8080'
+const JPA_API_URL = 'http://localhost:9191'
 
 class ProductService{
 
@@ -20,7 +20,7 @@ class ProductService{
     
     
     addProduct(product){
-        return axios.post(`${JPA_API_URL}/product` , product);
+        return axios.post(`${JPA_API_URL}/product`, product);
     }
     
     deleteProduct(pid){

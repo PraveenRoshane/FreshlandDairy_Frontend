@@ -1,32 +1,33 @@
 import axios from "axios";
+import {JPA_API_URL } from '../../Constants';
 
 class AccountServices{
     retriveAllAccounts(){
-        return axios.get('http://localhost:8080/users/accounts');
+        return axios.get(`${JPA_API_URL}/users/accounts`);
     }
 
     deleteAccount(id){
-        return axios.delete(`http://localhost:8080/users/accounts/${id}`);
+        return axios.delete(`${JPA_API_URL}/users/accounts/${id}`);
     }
 
     retriveAccount(id){
-        return axios.get(`http://localhost:8080/users/accounts/${id}`);
+        return axios.get(`${JPA_API_URL}/users/accounts/${id}`);
     }
 
     updateAccount(id, Account){
-        return axios.put(`http://localhost:8080/users/accounts/${id}`, Account);
+        return axios.put(`${JPA_API_URL}/users/accounts/${id}`, Account);
     }
 
     createAccount(Account){
-        return axios.post('http://localhost:8080/users/accounts', Account);
+        return axios.post(`${JPA_API_URL}/users/accounts`, Account);
     }
     
     getAccountReportObjects(accountType, month, year){
-        return axios.get(`http://localhost:8080/users/accounts/getreportobjects/${accountType}/${month}/${year}`)
+        return axios.get(`${JPA_API_URL}/users/accounts/getreportobjects/${accountType}/${month}/${year}`)
     }
 
     getSum(accountType, month, year){
-        return axios.get(`http://localhost:8080/users/accounts/getreportsums/${accountType}/${month}/${year}`)
+        return axios.get(`${JPA_API_URL}/users/accounts/getreportsums/${accountType}/${month}/${year}`)
     }
     
 }
