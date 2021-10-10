@@ -1,30 +1,31 @@
 import axios from "axios";
+import {JPA_API_URL } from '../Constants';
 
 class RawMaterialDataService{
     retriveAllrawmaterial(){
-        return axios.get('http://localhost:8080/users/rawmaterial');
+        return axios.get(`${JPA_API_URL}/users/rawmaterial`);
     }
 
     deleterawmaterial(id){
-        return axios.delete(`http://localhost:8080/users/rawmaterial/${id}`);
+        return axios.delete(`${JPA_API_URL}/users/rawmaterial/${id}`);
     }
 
     retriverawmaterial(id){
-        return axios.get(`http://localhost:8080/users/rawmaterial/${id}`);
+        return axios.get(`${JPA_API_URL}/users/rawmaterial/${id}`);
     }
 
     updaterawmaterial(id, rawmaterial){
-        return axios.put(`http://localhost:8080/users/rawmaterial/${id}`, rawmaterial);
+        return axios.put(`${JPA_API_URL}/users/rawmaterial/${id}`, rawmaterial);
     }
 
     createrawmaterial(rawmaterial){
-        return axios.post('http://localhost:8080/users/rawmaterial', rawmaterial);
+        return axios.post(`${JPA_API_URL}/users/rawmaterial`, rawmaterial);
     }
     
     
 
     Search(month){
-        return axios.get(`http://localhost:8080/users/rawmaterial/search/${month}`)
+        return axios.get(`${JPA_API_URL}/users/rawmaterial/search/${month}`)
     }
     
 }
