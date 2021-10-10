@@ -10,6 +10,7 @@ import FinanceManagementRoute from './Finance_Management/commoncomponents/financ
 import SaleseManagementHome from './Sales_Management/SalesManagementHome';
 import RawMaterialSidebar from './RawMaterialManagement/rawMaterialSideBar';
 import StockMngSidebar from './StockMangement/StockMngSideBar';
+import TransportHome from './TransportManagement/VehicleComponent/Home';
 
 function HomeRoute() {
     return (
@@ -23,11 +24,13 @@ function HomeRoute() {
                         <Route path="/Sales-management"  component={SaleseManagementHome} />
                         <Route path="/rawmaterialManagement"  component={RawMaterialSidebar} />
                         <Route path="/StockManagement"  component={StockMngSidebar} />
+                        <Route path="/transportmanagement"  component={TransportHome} />
                         <ShopMain />
                         <FinanceManagementRoute />
                         <SaleseManagementHome/>
                         <RawMaterialSidebar/>
                         <StockMngSidebar/>
+                        <TransportHome/>
                         <AuthenticatedRoute path="/logout" exact component={LogoutComponent} />
                         <Route component={ErrorMessage} />
                     </Switch>

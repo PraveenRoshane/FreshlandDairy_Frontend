@@ -36,7 +36,7 @@ function ViewNewBill(){
 
 
     const updateClicked=(id)=>{
-        history.push('/Sales-management/update/:id');
+      history.push(`/Sales-management/updatebill/${id}`);
         alert(id);
       
         // component={Link} {`/updateproduct/${i.pid}`}
@@ -66,16 +66,24 @@ function ViewNewBill(){
     return(
       
         <div className="container">
-    <Table striped bordered hover>
+           <div className="card col-md-9 offset-md-1 offset-md-2">
+        <div className="card-body">
+      <div className="table table-sm table-light">
+      <h2>bill list</h2>
+      <br/>
+
+
+
+        <Table >
         <thead>
           <tr>
-            <th>bid</th>
-            <th> date</th>
-            <th> cName</th>
+            <th>ID</th>
+            <th> Date</th>
+            <th> Customer Name</th>
             {/* <th> pname</th> */}
             
-            <th>total</th>
-            <th>action</th>
+            <th>Total</th>
+            <th>Action</th>
             {/* <th>delete</th> */}
            
           </tr>
@@ -89,8 +97,8 @@ function ViewNewBill(){
                <td>{b.cName}</td>
                {/* <td>{b.pName}</td> */}
                <td>{b.total}</td>
-               <td><button className="btn btn-success" onClick={() =>{updateClicked(b.id)}}>update</button>
-               <button className="btn btn-warning" onClick={() =>{deleteClicked(b.id)}}>delete</button>
+               <td><button className="btn btn-success" onClick={() =>{updateClicked(b.id)}} style={{marginRight:10}}>update</button>
+               <button className="btn btn-warning" onClick={() =>{deleteClicked(b.id)}} style={{marginRight:10}}>delete</button>
                <button className="btn btn-success" onClick={() =>{viewClick(b.id)}}>view</button>
                </td>
 
@@ -107,6 +115,9 @@ function ViewNewBill(){
       {/* <Button variant="primary"  onClick={additem}>
        add
       </Button> */}
+      </div>
+      </div>
+      </div>
       </div>
 
 

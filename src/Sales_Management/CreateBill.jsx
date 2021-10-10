@@ -1,30 +1,25 @@
 import React from "react";
-import react, { useState, useEffect } from 'react';
-// import MyData from '../../api/myApi/BillService.js'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import  { useState, useEffect } from 'react';
 import moment from 'moment'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, Form, FormControl, FormGroup, FormLabel, FormSelect, Table } from 'react-bootstrap';
-
-// import BillData from '../../api/myApi/BillService.js'
+import { Button, Form, Table } from 'react-bootstrap';
 import ProductService from "../API/Sales_Management/ProductService";
 import BillService from "../API/Sales_Management/BillService";
-
+import { useHistory } from 'react-router'
 
 
 export default function CreateBill() {
 
-
   const [pname, setpname] = useState('');
   const [qty, setqty] = useState(0);
-  //const[name,setname]=useState('');
   const [amount, setamount] = useState(0);
   const [price, setprice] = useState(0);
   const [total, settotal] = useState(amount);
-
   // product list enne mekennn
   const [itemlist, setItemlist] = useState([])
   const [b, setb] = useState([])
+  const [bid,setbid] = useState(0);
+  const history = useHistory()
 
 
   //metanin ganneee
@@ -37,85 +32,63 @@ export default function CreateBill() {
   }, [])
 
 
-  const clickSubmit = (event) => {
-    event.preventDefault();
+      const clickSubmit = (event) => {
+        event.preventDefault();
 
-    const data = event.target;
-    const billSubmit = {
-      date: data.date.value,
-      //date : moment( Date()).format('YYYY-MM-DD'),
-      cName: data.cname.value,
-      total: data.total.value,
-    }
-    console.log(billSubmit);
-
-    // MyData.insertBill(billSubmit)
-    //   .then((res)=>console.log(res));
-
-    BillService.insertBill(billSubmit)
-      .then((res => {
-        {
-          b.map((p) => {
-            let order = { id: res.data.id, pName: p.pName, qty: p.qty, amount: p.amount }
-            // let order ={id:res.data.id, pName:pname, qty:qty, amount:amount}
-            BillService.insertBillDetails(order)
-            console.log(order);
-          })
+        const data = event.target;
+        const billSubmit = {
+          date: data.date.value,
+          //date : moment( Date()).format('YYYY-MM-DD'),
+          cName: data.cname.value,
+          total: data.total.value,
         }
-      }))
-    //console.log(order);
+        console.log(billSubmit);
+        BillService.insertBill(billSubmit)
+          .then((res => {
+            {
+              b.map((p) => {
+                let order = { id: res.data.id, pName: p.pName, qty: p.qty, amount: p.amount }
+                // let order ={id:res.data.id, pName:pname, qty:qty, amount:amount}
+                BillService.insertBillDetails(order)
+                console.log(order);
+                setbid(res.data.id);
+              })
+            }
+          }))
+        //console.log(order);
 
-  };
-
-
-  const selectprice = (event) => {
-    let a = event.target.value;
-    console.log(a);
-  }
-
-
-
-  const entrtQty = (event) => {
-
-    event.preventDefault();
-    console.log(event.target.value);
-
-    setqty(event.target.value)
-
-    const a = event.target.value * price;
-    console.log(a);
+      };
 
 
-    setamount(event.target.value * price);
-  }
+        const selectprice = (event) => {
+          let a = event.target.value;
+          console.log(a);
+        }
 
-  //set kara ganneeee 
-  const selectItem = (event) => {
-    event.preventDefault();
-    // console.log(event.target.value);
+        const entrtQty = (event) => {
 
-    // setpname([...pname,event.target.value]);
-    setpname(event.target.value);
-    // console.log([pname]);
+          event.preventDefault();
+          console.log(event.target.value);
 
-    itemlist.forEach((p) => {
-      if (p.pName == event.target.value)
-        setprice(p.price)
+          setqty(event.target.value)
+
+          const a = event.target.value * price;
+          console.log(a);
 
 
-    })
-    // console.log(pid)
+          setamount(event.target.value * price);
+        }
 
-    // {itemlist.map((t) =>(
-    //   t.pName==event.target.value && t.price 
-
-    // ))}
-
-    // console.log(event.target.price);
-    // b=event.target.value;
-
-    // setprice([event.target.value])
-  }
+      //set kara ganneeee 
+      const selectItem = (event) => {
+        event.preventDefault();
+        setpname(event.target.value);
+        
+        itemlist.forEach((p) => {
+          if (p.pName == event.target.value)
+            setprice(p.price)
+        })
+      }
 
 
   const moreAdd = (e) => {
@@ -141,27 +114,32 @@ export default function CreateBill() {
     console.log('total', total);
 
     console.log(o)
-    // totalcal();
-
-    // console.log(b)
+    
   }
   console.log(b)
-  // let p=b.amount;
-  // console.log(p)
+  
 
+
+  const printClick=(bid)=>{
+    history.push(`/Sales-management/printBill/${bid}`);
+    alert(bid);
+  }
 
 
 
   return (
     <div className="container">
 
+    <div className="card col-md-9 offset-md-1 offset-md-2">
+        <div className="card-body">
+      <div className="table table-sm table-light">
+      <h2>create bill</h2>
+      <br/>
 
 
-      <h2>hiiii</h2>
-      <h2>bill</h2>
       <Form onSubmit={clickSubmit}>
 
-        <div className="card col-md-20 offset-md-0 offset-md-0">
+        <div >
           <div>
             <td>
 
@@ -183,6 +161,14 @@ export default function CreateBill() {
 
             </td>
           </div>
+
+          <div>
+          total
+          <Form.Control value={total} type="text" placeholder="value" readOnly name="total">
+            
+          </Form.Control>
+          </div>
+
 
           <table className="table">
             <thead>
@@ -241,12 +227,11 @@ export default function CreateBill() {
               </tr>
             </tbody>
           </table>
-          total
-          <Form.Control value={total} type="text" placeholder="value" readOnly name="total">
-            
-          </Form.Control>
+          
 
-          <Button variant="primary" type="submit">
+{/* style={{width:"40%"}} */}
+
+          <Button className="btn btn-success" type="submit" >
             Submit
           </Button>
 
@@ -257,13 +242,13 @@ export default function CreateBill() {
       </Form>
 
 
-      <Table striped bordered hover>
+      <Table>
         <thead>
           <tr>
-            <th>item</th>
+            {/* <th>item</th>
             <th>price</th>
             <th>qty</th>
-            <th>amount</th>
+            <th>amount</th> */}
 
           </tr>
         </thead>
@@ -287,9 +272,13 @@ export default function CreateBill() {
         </tbody>
       </Table>
 
-
+      <button className="btn btn-success" onClick={() =>{printClick(bid)}}>print</button>
 
     </div>
+    </div>
+    </div>
+    </div>
+
   )
 
 }
