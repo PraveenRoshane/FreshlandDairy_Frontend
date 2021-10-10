@@ -1,37 +1,38 @@
 import React, {Component} from 'react'
 import {BrowserRouter as Router , Route, Switch } from 'react-router-dom'
-// import InsertBill from './InsertBill.jsx';
 import UpdateBill from './UpdateBill.jsx';
-// import ViewBill from './ViewBill.jsx';
 import ViewProduct from './ViewProduct.jsx';
 import AddProduct from './AddProduct.jsx';
 import { Link } from 'react-router-dom';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 import CreateBill from './CreateBill.jsx';
 import ViewNewBill from './ViewNewBill.jsx';
-
 import ViewBillDetails from './ViewBillDetails.jsx';
-
-// import BillView from './BillView.jsx';
-// import NavBar from './NavBar.jsx';
 import UpdateProduct from './UpdateProduct.jsx';
+// import { Button,Table,Card,Container,Row,Col} from 'react-bootstrap';
+import PrintBill from './PrintBill.jsx';
 
-import { Button,Table,Card,Container,Row,Col} from 'react-bootstrap';
-
+import Grid from '@material-ui/core/Grid';
+import { Card, CardMedia, Zoom, CardHeader } from '@material-ui/core';
+import bill from "../asserts/fmbill.jpg"
+import udula from "../asserts/bbb.jpg"
+import view from "../asserts/viewbill.jpg"
+import product from "../asserts/productu.jpg"
+ import Header from './Header.jsx';
+ import Footer from './Footer.jsx';
 
 class SaleseManagementHome extends Component{
     render(){
         return(
             <>
-            <div className="home"></div>
+            <div className="Sales_home">
                     
-                    <Router>
-                    <HeaderCom/>
+                <Header/>
+                    {/* <Router> */}
+                    {/* <Header/> */}
                     {/* <Link to="/Sales-management">hgjhjb</Link>  */}
-                        <Switch>
-                        <Route path="/update/:id" component={UpdateBill}/>
+                        {/* <Switch> */}
+                        <Route path="/Sales-management/updatebill/:id" component={UpdateBill}/>
                         {/* <Route path="/view" component={ViewBill}/> */}
                         <Route path="/Sales-management" exact component={Home}/>  
                         {/* <Route path="/insert" component={InsertBill}/>
@@ -44,11 +45,14 @@ class SaleseManagementHome extends Component{
                         <Route path="/Sales-management/create" component={CreateBill}/>
                         <Route path="/Sales-management/newview" component={ViewNewBill}/>
                         <Route path="/Sales-management/viewbilldetails/:id" component={ViewBillDetails}/>
+                        <Route path="/Sales-management/printBill/:bid" component={PrintBill}/>
                         {/* <Route path="/Sales-management/billview" component={BillView}/> */}
                           
-                        </Switch>
-                    {/* <FooterCom/> */}
-                    </Router>
+                        {/* </Switch> */}
+                    <Footer/>
+                    {/* </Router> */}
+
+                    </div>
 
            
             </>
@@ -68,11 +72,60 @@ class Home extends Component{
         return(
             
                 <div className="Home">
-                    {/* <NavBar/> */}
-                     <React.Fragment> 
-                    <h1>sales management system</h1>
+
+<div className="container">
+                <Grid container spacing={6} >
                     
-    <Container>
+                    <Grid item xs={12} md={6} lg={4}>
+                        <Zoom in={true} style={{ transitionDelay: true ? '150ms' : '0ms' }} timeout={{ enter: 700 }}>
+                            <Card elevation={10}>
+                                <CardHeader title="create bill " />
+                                <Link to={`/Sales-management/create`}>
+                                    <CardMedia >
+                                        <img alt='' src={udula} width="300dp" height="250dp" />
+                                    </CardMedia>
+                                </Link>
+                            </Card>
+                        </Zoom>
+                    </Grid>
+                    <Grid item xs={12} md={6} lg={4}>
+                        <Zoom in={true} style={{ transitionDelay: true ? '150ms' : '0ms' }} timeout={{ enter: 700 }}>
+                            <Card elevation={10}>
+                                <CardHeader title="view bill" />
+                                <Link to={`/Sales-management/newview`}>
+                                    <CardMedia >
+                                        <img alt='' src={view} width="300dp" height="250dp" />
+                                    </CardMedia>
+                                </Link>
+                            </Card>
+                        </Zoom>
+                    </Grid>
+                    <Grid item xs={12} md={6} lg={4}>
+                        <Zoom in={true} style={{ transitionDelay: true ? '150ms' : '0ms' }} timeout={{ enter: 700 }}>
+                            <Card elevation={10}>
+                                <CardHeader title="product Management" />
+                                <Link to={`/Sales-management/ViewProduct`}>
+                                    <CardMedia >
+                                        <img alt='' src={product} width="300dp" height="250dp" />
+                                    </CardMedia>
+                                </Link>
+                            </Card>
+                        </Zoom>
+                    </Grid>
+                </Grid>
+            </div>
+
+
+
+
+
+
+
+                    
+                     {/* <React.Fragment> 
+                    <h1>sales management system</h1>
+                     */}
+    {/* <Container>
         <div>
         <Card>
             <Row>
@@ -132,7 +185,7 @@ class Home extends Component{
                 </div>
   
   
-        </Container> 
+        </Container>  */}
 
 
 {/* <Card style={{ width: '18rem',left:950 }}>
@@ -154,7 +207,7 @@ class Home extends Component{
 
                     <button className="btn btn-success" onClick={this.CreateClick}>create bil</button> */}
                     {/* this.props.history.push("/InsertBill") */}
-                    </React.Fragment> 
+                    {/* </React.Fragment>  */}
                    
                    
                 </div>
@@ -193,8 +246,8 @@ class HeaderCom extends Component{
     render(){
         return(
                 <div className="HeaderCom">
-                    <header>headerr</header>
-                    <hr/>
+                   <Header/>
+                    
                 </div>
         )
     }
