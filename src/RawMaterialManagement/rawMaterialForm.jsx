@@ -24,10 +24,26 @@ class RawMaterialForm extends Component{
 
     validate(values){
         let errors = {}
-        
+        if (!values.rawMName){
+            errors.rawMName = 'Enter A Raw Material Name'
+        }else if (values.rawMName.length < 4){
+            errors.rawMName = "Enter At least 4 Charactors in Raw Material Name"
+        }
+
+        if (!moment(values.date).isValid()) {
+            errors.date = 'Enter a valid Date'
+        }
+
+        if (!values.rawMType){
+            errors.rawMType = 'Enter A Type'
+        }
+
 
         return errors
     }
+        
+
+        
     componentDidMount() {
         if (this.state.id == -1){
             return

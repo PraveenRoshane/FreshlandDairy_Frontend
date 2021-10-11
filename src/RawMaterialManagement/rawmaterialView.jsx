@@ -37,7 +37,7 @@ const RawmaterialView =() =>{
     return(
         <><br></br>
         <div className = "Viewrawmaterial">
-                <h1>List OF Raw Material </h1>
+                <h1>List Of Raw Material </h1>
                     {message && <div className ="alert alert-succcess">{message}</div>}
 
                 <br></br>
