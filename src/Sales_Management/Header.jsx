@@ -1,7 +1,8 @@
+
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
-//import Authentication from '../../API/Authentication.js'
-class MyHeader extends Component{
+
+class Header extends Component{
     
     
     render(){
@@ -12,10 +13,10 @@ class MyHeader extends Component{
                 
                 <ul className = "navbar-nav">
                     <li className ="nav-link"><Link className="nav-link" to="/Home">Home</Link></li>
-                    <li className ="nav-link"><Link className="nav-link" to="/FinanceManagement">Finance Management Home</Link></li>
-                    {/* <li className ="nav-link"><Link className="nav-link" to="/FinanceManagement/bills">Bill Function</Link></li>
-                    <li className ="nav-link"><Link className="nav-link" to="/FinanceManagement/salary">Salary Function</Link></li>
-                    <li className ="nav-link"><Link className="nav-link" to="/FinanceManagement/accounts">Accounts</Link></li> */}
+                    <li className ="nav-link"><Link className="nav-link" to="/Sales-management">Sales Management Home</Link></li>
+                    <li className ="nav-link"><Link className="nav-link" to="/Sales-management/create">create Bill Function</Link></li>
+                    <li className ="nav-link"><Link className="nav-link" to="/Sales-management/newview">view bill Function</Link></li>
+                    <li className ="nav-link"><Link className="nav-link" to="/FinanceManagement/accounts">Accounts</Link></li>
                 </ul>
                 <ul className = "navbar-nav navbar-collapse justify-content-end">
                     <li className ="nav-link" ><Link className="nav-link" to="/">Logout</Link></li>
@@ -29,4 +30,4 @@ class MyHeader extends Component{
 }
 
 
-export default MyHeader;
+export default Header;

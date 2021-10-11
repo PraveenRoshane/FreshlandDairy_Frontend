@@ -1,241 +1,163 @@
-// // eslint-disable
-// import React, {Component} from 'react'
-// import {BrowserRouter as Router , Route, Switch } from 'react-router-dom'
-// import moment from 'moment'
-// import { Field, Form, Formik } from 'formik'
-// import MyData from '../../api/myApi/BillService.js'
-// import ViewNewBill from './ViewNewBill.jsx'
-
-// class UpdateBill extends Component{
-
-//     constructor(props){
-//         super(props)
-
-//         this.state = {
-//             bid : this.props.match.params.bid,
-//             date : moment(new Date()).format('YYYY-MM-DD'),
-//             cname : '',
-//             item : '',
-//             qty : '',
-//             total : '',
-
-//         }
-
-//         this.onSubmit = this.onSubmit.bind(this)
-//         // this.cal = this.cal.bind(this)
-//         this.qtychangeHandler = this.qtychangeHandler.bind(this)
 
 
-//     }
+import React, {Component} from 'react'
+import {BrowserRouter as Router , Route, Switch } from 'react-router-dom'
+import MyData from '../API/Sales_Management/BillService'
+import moment from 'moment'
 
-//     componentDidMount() {
+import { useState, useEffect } from 'react'
+import { Button,Form,FormControl,FormGroup,FormLabel,FormSelect,Table } from 'react-bootstrap';
+import { useHistory,useParams } from 'react-router'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-//         if(this.state.bid==-1){
-//             return
-//         }
-
-//         MyData.retrieveBill(this.state.bid)
-//         .then(response => this.setState({
-//             date: moment(response.data.date).format('YYYY-MM-DD'),
-//             cname: response.data.cname,
-//             item: response.data.item,
-//             qty: response.data.qty,
-//             total: response.data.total,
-//         }))
+// import ProductService from "../../api/myApi/ProductService.js";
 
 
-//         // this.cal();
-//         // this.qtychangeHandler();
-//     }    
+function UpdateBill(props){
 
-//         onSubmit(values) {
+    const {id}= useParams();
+    //const {billlist}= useParams();
+    const [bill,setbill] =useState([]);
+    const history = useHistory()
+    const [details,setdetails] = useState([]);
 
-//             let m = {
-//                 id: this.state.bid,
-//                 date: values.date,
-//                 name: values.name,
-//                 item: values.item,
-//                 qty: values.qty,
-//                 amount: values.amount,
 
-//             }
+    //const bid:props.id,
+    console.log( 'update',id);
+   //console.log(billlist);
 
-//             if (this.state.bid ==-1) {
-//                 MyData.insertBill(m).then(() => this.props.history.push("/view"))
+    useEffect(()=>{
+        console.log("detailss");
+        MyData.retrieveBill(id)
+        .then((Response) =>{setbill({
 
-//             } else {
+            // moment(Response.data.date) .format('YYYY-MM-DD')
+            date:moment(Response.data.date) .format('YYYY-MM-DD'),
+            cName:Response.data.cName,
+            total:Response.data.total,
+        })})
+        console.log(bill);
+        // settotal([amount]);
 
-//                 MyData.updateBill(this.state.bid, m ).then(() => this.props.history.push("/view"))
+        MyData.retrieveBillDetailsByID(id)
+        .then((Response) =>{setdetails(Response.data)})
 
-//             }
+      },[])
 
-//         }
+      console.log(bill);
+      console.log(details);
 
-//         validate(values){
-            
-//         }
 
-//         // cal(event){
-//             // let p = 500
-//             // let i ={qty: values.qty,amount: values.amount}
-//             // cal=() =>{
-//             //     console.log('quentity:', this.state.qty)
-//             // this.setState( {
-                
-//             //     amount: this.state.qty * 500,
-//             //     // console.log('Cal Function')
-                
-//             //   } )
-//             //   console.log('Cal Function')
-//             // }
-//         // }
-//             // // if(values.item=="milk")
-//             // console.log(values.amount)
-//             // // this.state.amount= p*this.state.qty
-//             // // console.log('enwatheee')
-//         //     console.log(this.amount)
-//         //     // return i
-
-//         // }
-
-//         qtychangeHandler(event) {
-//             console.log(event.target.value)
-//             this.setState({
-//                 qty: event.target.value,
-//                 amount: event.target.value * 500,
-//                 // name: event.target.values,
-//                 // item: event.target.values,
-
-//             });
-            
-//         }
+      const clickSubmit=(event)=>{
+        event.preventDefault();
+        const psubmit = {
+            date:event.target.date.value,
+            cName:event.target.cName.value,
+            total:event.target.total.value,
+    
+            // setproduct([psubmit])
+        }
+    
+        //setproduct([psubmit])
+        console.log(psubmit);
+        MyData.updateBill(id,psubmit)
+        .then(res =>{ history.push("/Sales-management/newview") })
+        // history.push("/")
+        console.log(psubmit);
+        console.log(Response);
+        // history.push("/item")
 
     
+    }
 
 
-//     render(){
-
-//         let {date,name,item,qty,amount}= this.state
-
-//         return(
-//                 <div className="UpdateBill">
-//                     <h2>bill</h2>
-//                     <div className="container">
-//                         <Formik initialValues={{date,name,item,qty,amount}} onSubmit={this.onSubmit} validate={this.validate}  enableReinitialize={true}>
-//                             {
-//                                 (props) =>  (
-//                                     <Form>
-//                                         <div>
-//                                     <td><fieldset className="form-group" >
-                                       
-//                                        <Field className="form-control" type="date" name="date" />
-//                                    </fieldset></td>
-                                   
-//                                     <div>
-//                                    <td> <fieldset className="form-group">
-                                       
-//                                        <Field className="form-control" type="text" name="name" />
-//                                    </fieldset></td>
-//                                     </div>
-//                                         <table className="table">
-//                                         <thead>
-//                                         <tr>
-//                                             {/* <th>id</th> */}
-//                                             {/* <th>date</th>
-//                                             <th>name</th> */}
-//                                             <th>item</th>
-//                                             {/* <th>price</th> */}
-//                                             <th>qty</th>
-//                                             <th>rs</th>
-//                                         </tr>
-//                                          </thead> 
-
-//                                          <tbody>
-//                                              <tr>
+    const changedate=(event)=>{
+        setbill({date:event.target.value})
+        //value=event.target.value;
+    }
 
 
-                                        
+    const changeNmae=(event)=>{
+        setbill({cName:event.target.value})
+        //value=event.target.value;
+    }
 
-                                       
+      return(
 
-//                                       {/* <td>  <fieldset className="form-group" >
-                                            
-//                                             <Field className="form-control" type="text" name="item"/>
-//                                         </fieldset></td> */}
+        <div className="container">
 
-                                      
-
-//                                            <td> <fieldset className="form-group">
-//                                            <Field className="form-control" component="select"  name="item"  >
-                                                
-//                                                <option value="ice">ice</option> 
-//                                                <option value="milk">milk</option> 
-//                                                <option value="cake">cake</option> 
-//                                                </Field>
-//                                            </fieldset></td>
+    <div className="card col-md-9 offset-md-1 offset-md-2">
+        <div className="card-body">
+      <div className="table table-sm table-light">
+      <h2>detilsss</h2>
+      <br/>
 
 
-//                                            {/* <td> <fieldset className="form-group">
-                                               
-//                                            <Field className="form-control" component="select"  name="item"  >
-//                                            <select>
-//                                                 <option disabled selected="true">select</option>
-//                                                <option value="ice">ice</option> 
-//                                                <option value="milk">milk</option> 
-//                                                <option value="cake">cake</option> 
-//                                                </select>
-//                                                </Field>
-                                               
-//                                            </fieldset></td> */}
+        <h2>detilsss</h2>
+        {/* id={bill.id}
+         date={moment(bill.date) .format('YYYY-MM-DD')}
+         name={bill.cName}
+         total={bill.total} */}
 
 
+         <Form onSubmit={clickSubmit}>
 
-//                                         {/* <td> <fieldset className="form-group">
-//                                                  500
-//                                             </fieldset></td> */}
+  <Form.Group className="mb-3" controlId="itemname">
+    <Form.Label>date</Form.Label>
+    <Form.Control type="date" placeholder="date" name="date" value={bill.date } onChange={changedate}  />
+  </Form.Group>
 
-//                                       <td>  <fieldset className="form-group">
-                                            
-//                                             <Field className="form-control" type="text" name="qty" onChange={this.qtychangeHandler}/>
-//                                         </fieldset></td>
+  <Form.Group className="mb-3" controlId="price">
+    <Form.Label>name</Form.Label>
+    <Form.Control type="text" placeholder="name" name="cName"  value={bill.cName } onChange={changeNmae} />
+  </Form.Group>
 
-//                                      {/* <td>   <fieldset className="form-group">
-                                            
-//                                             <Field className="form-control" type="text" name="amount"/>
-//                                         </fieldset></td> */}
+Total
+  <Form.Control  value={bill.total} type="number" placeholder="value" readOnly name="total">
+</Form.Control>
 
-//                                         <td> <fieldset className="form-group">
-//                                             {/* {this.state.qty*50} */}
-//                                             {this.state.amount}
-//                                             </fieldset></td>
-//                                         {console.log(this.state.qty)}
-                                        
+  <Button variant="primary" type="submit">
+    Submit
+  </Button>
+</Form>
+       
 
-//                                         </tr>
+        <Table >
+        <thead>
+          <tr>
+            <th>Product Name</th>
+            
+            <th>Qty</th>
+            <th>Amount</th>
+           
+          </tr>
+        </thead>
+        <tbody>
 
-//                                         </tbody>
-//                                         </table>
-//                                         {/* <button className="btn btn-success" onClick={this.cal}>cal</button> */}
-//                                         <button className="btn btn-success" type="submit" >save</button>
-//                                         </div>
-//                                     </Form>
-                                     
-//                                 )
+            {details.map((i) => (
+               <tr key={i.id}>
+                <td>{i.billproductpk.pName}</td> 
+                
+               <td>{i.qty}</td>
+              
+               <td>{i.amount}</td>
+               
+               
+             </tr> 
+             
+             
+            ))}
+          
+          
+        </tbody>
+      </Table>
+      </div>
+      </div>
+      </div>
+        </div>
+);
 
-//                             }
-//                         </Formik>
-//                         {/* <button className="btn btn-success" onClick={this.cal}>cal</button> */}
-
-                        
+}
+export default UpdateBill
 
 
-
-//                     </div>
-//                     {/* <div>id - {this.props.match.params.id}</div> */}
-                    
-//                 </div>
-//         )
-//     }
-// } 
- 
-// export default UpdateBill
