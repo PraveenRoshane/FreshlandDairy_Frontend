@@ -1,35 +1,30 @@
-import React, {Component} from 'react'
+import react, { useState,useEffect } from 'react';
+import { useHistory,useParams } from 'react-router';
 import RawMaterialDataService from '../API/RawMaterialDataService';
+import printJS from 'print-js';
 
+function RawmeterialReportView (props) {
+    
+    const {month}= useParams();
+    const [rawmaterial, setrawmaterial] = useState([])
+    const history = useHistory()
 
-class RawmeterialReportView extends Component {
+    useEffect(()=>{
+        refreshrstocks()
+    },[])
     
-    constructor (props){
-        super(props)
-        this.state = {
-            rawmaterial : [],
-            month : this.props.match.params.month
-        }
-        
-    }
+    const refreshrstocks=() =>{
     
-    componentDidMount (){
-        RawMaterialDataService.Search(this.state.month)
-            .then(
-                response => {
-                    this.setState({rawmaterial : response.data})
-                }
+        RawMaterialDataService.Search(month)
+            .then(response => {setrawmaterial(response.data)}
             )
-        
-    }
-    
-    
-    render(){
+        }
+
         return(
             <>
             <br></br>
             <div className = "RawmeterialReportView">
-                <h1>List OF {this.state.month} </h1>
+                <h1>List OF {month} </h1>
                 
 
                 <div className="container">
@@ -47,7 +42,7 @@ class RawmeterialReportView extends Component {
                     </thead>
                     <tbody>
                         { 
-                            this.state.rawmaterial.map(
+                            rawmaterial.map(
                                 rawmaterial=>
                                 <tr key ={rawmaterial.id}>
                                     <td>{rawmaterial.rawMID}</td>
@@ -64,11 +59,25 @@ class RawmeterialReportView extends Component {
                 </table>
                 
                 </div>
-
+                <div>
+              <button type="button" className="btn btn-info" onClick={ () =>printJS({
+              printable: rawmaterial, header: 'Stock Report',
+                properties: [  { field: 'rawMID', displayName: 'Rawmaterial ID'},
+                                { field: 'rawMType', displayName: 'Rawmaterial Type'},
+                                { field: 'rawMName', displayName: 'Raw material Name'},
+                                
+                                { field: 'date', displayName: 'date'},
+                                { field: 'arrQty', displayName: 'arrQty'},
+                                { field: 'reQty', displayName: 'reQty'}],
+              type: 'json'
+                })}>
+                Print  Report
+                </button>
+              </div>
         </div><br></br>
         </>
-        )
-    }
+        );
+    
 }
 
 export default RawmeterialReportView;

@@ -106,7 +106,7 @@ const SalaryView =() =>{
                         }
                     </tbody>
                 </table>
-                
+                <br/>
                 </div>
 
         </div>

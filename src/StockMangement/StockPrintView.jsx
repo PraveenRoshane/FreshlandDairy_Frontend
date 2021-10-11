@@ -1,35 +1,34 @@
-import React, {Component} from 'react'
+import react, { useState,useEffect } from 'react';
+import { useHistory,useParams } from 'react-router';
 import stockmanagementDataService from '../API/StockManagement';
+import printJS from 'print-js';
 
+function StockReportView  (props){
+    
+    const {month}= useParams();
+    const [stock, setstock] = useState([])
+    const history = useHistory()
 
-class StockReportView extends Component {
+    useEffect(()=>{
+        refreshrstocks()
+    },[])
+
+    const refreshrstocks=() =>{
     
-    constructor (props){
-        super(props)
-        this.state = {
-            stock : [],
-            month : this.props.match.params.month
-        }
-        
-    }
-    
-    componentDidMount (){
-        stockmanagementDataService.Search(this.state.month)
-            .then(
-                response => {
-                    this.setState({stock : response.data})
-                }
+        stockmanagementDataService.Search(month)
+            .then(response => {setstock(response.data)}
             )
-        
-    }
+        }
+
     
     
-    render(){
+    
+    
         return(
             <>
             <br></br>
             <div className = "StockReportView">
-                <h1>List OF {this.state.month} </h1>
+                <h1>List OF {month} </h1>
                 
 
                 <div className="container">
@@ -49,7 +48,7 @@ class StockReportView extends Component {
                     </thead>
                     <tbody>
                         { 
-                            this.state.stock.map(
+                            stock.map(
                                 stock=>
                                 <tr key ={stock.id}>
                                     <td>{stock.sid}</td>
@@ -68,11 +67,24 @@ class StockReportView extends Component {
                 </table>
                 
                 </div>
-
+                <button type="button" className="btn btn-info" onClick={ () =>printJS({
+              printable: stock, header: 'Stock Report',
+                properties: [  { field: 'sid', displayName: 'Stock Id'},
+                                { field: 'name', displayName: 'Stock name'},
+                                { field: 'discription', displayName: 'Discription'},
+                                { field: 'wight', displayName: 'wight'},
+                                { field: 'price', displayName: 'price'},
+                                { field: 'date', displayName: 'date'},
+                                { field: 'arrQty', displayName: 'arrQty'},
+                                { field: 'reQty', displayName: 'reQty'}],
+              type: 'json'
+                })}>
+                Print  Report
+                </button>     
         </div><br></br>
         </>
         )
-    }
+    
 }
 
 export default StockReportView;

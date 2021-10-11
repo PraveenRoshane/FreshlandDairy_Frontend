@@ -23,7 +23,7 @@ class billform extends Component{
         let errors = {}
         if (!values.description){
             errors.description = 'Enter A Discription'
-        }else if (values.description.length < 5){
+        }else if (values.description.length < 4){
             errors.description = "Enter Atleast 5 Charactors in description"
         }
 
